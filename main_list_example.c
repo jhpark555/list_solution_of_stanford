@@ -638,8 +638,89 @@ struct node* SortedIntersect2(struct node*a , struct node* b)
     }
     return(result);
 }
+void Reverse(struct node** ptrref)
+{
+    struct node* prev=NULL;
+    struct node *current = *ptrref;
+    struct node* next;
+    
+    while(current!=NULL){
+        next=current->next;
+        current->next=prev;
+        prev=current;
+        current=next;
+    }
+   *ptrref=prev;
+   
+    length(*ptrref);
+}
+
+void Reverse2(struct node** ptrref)
+{
+    struct node* prev=NULL;
+    struct node *current = *ptrref;
+    
+    while(current!=NULL){
+      MoveNode(&prev,&current);
+    }
+   *ptrref=prev;
+   
+    length(*ptrref);
+}
+
+void Reverse3(struct node** ptrref)
+{
+    struct node* middle = *ptrref;
+    struct node* front =middle->next;
+    struct node* back=NULL;
+    
+    while(1){
+        middle->next = back;
+        if(front ==NULL) break;
+        back=middle;
+        middle=front;
+        front=front->next;
+    
+    }
+   *ptrref=middle;
+   
+    length(*ptrref);
+}
 
 
+
+void ReverseTest()
+{
+    struct node* head;
+    
+    head=buildonetwothree();
+    Reverse3(&head);
+    
+    DeleteList(&head);
+    
+}
+
+void RecursiveReverse(struct node** headref)
+{
+    struct node* first;
+    struct node* rest;
+    
+    if(*headref ==NULL) return;
+    
+    first=*headref;     // 1,2,3
+    rest=first->next;   //2.3
+    
+    if(rest==NULL) return;
+    
+    RecursiveReverse(&rest);
+    
+    first->next->next=first;
+    first->next=NULL;
+    
+    *headref =rest;
+    
+    
+}
 
 int main()
 {
@@ -668,16 +749,19 @@ int main()
  //Movenodetest();
  
  //AlternatingSplit(head,&front,&back);
- length(head); printf(":");
- length(tail); printf("\n");
+ //length(head); printf(":");
+ //length(tail); printf("\n");
 // struct node* res=ShuffleMerge3(head,tail);
 //struct node* res= SortedMerge3(head,tail);
-struct node* res = SortedIntersect2(head,tail);
- length(res);
+//struct node* res = SortedIntersect2(head,tail);
+// length(res);
  // printf("--------\n");
   //length(back);
+  //ReverseTest();
+  RecursiveReverse(&head);  length(head);
     return 0;
 }
+
 
 
 
