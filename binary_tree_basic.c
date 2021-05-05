@@ -7,6 +7,7 @@ Code, Compile, Run and Debug online from anywhere in world.
 
 *******************************************************************************/
 #include <stdio.h>
+#include <stdbool.h>
 
 struct node{
     int data;
@@ -85,9 +86,10 @@ struct node* build12345()
     struct node* root= NULL;
     root=insert(root,4);
     root=insert(root,2);
-    root=insert(root,5);
+    root=insert(root,6);
     root=insert(root,1);
     root=insert(root,3);
+    root=insert(root,5);
     
     return(root);
 }
@@ -206,11 +208,90 @@ void printPaths(struct node* node)
     
 }
 
+
+struct node* mirror(struct node* node)
+{
+    struct node* current;
+    if(node==NULL) return;
+    else{
+        mirror(node->left);
+        mirror(node->right);
+        
+        current=node->left;
+        node->left=node->right;
+        node->right=current;
+        
+    }
+    return node;
+}
+
+struct node* doubleTree(struct node* node)
+{
+    struct node* oldLeft;
+    
+    if(node==NULL) return;
+   
+    doubleTree(node->left);
+    doubleTree(node->right);
+    
+    oldLeft=node->left;
+    
+    node->left=NewNode(node->data);
+    node->left->left=oldLeft;
+    
+    return(node);
+}
+
+int sameTree(struct node* a,struct node* b)
+{
+    if(a==NULL && b==NULL ) return(1);
+    else if(a!=NULL && b!=NULL){
+       // printf(" ==%d %d \n",a->data,b->data);
+        return(
+       ( a->data == b->data) &&
+        sameTree(a->left,b->left) &&
+        sameTree(a->right,b->right));
+    }
+    else return(0);
+}
+
+int countTrees(int numKeys)
+{
+    if(numKeys <=1) return (1);
+    else{
+        int sum=0;
+        int left,right,root;
+        
+        for(root=1;root<=numKeys;root++){
+            left=countTrees(root-1);
+            right=countTrees(numKeys-root);
+            
+            sum +=left*right;
+        }
+        return(sum);
+    }
+}
+
+int isBST(struct node* node)
+{
+    if(node==NULL) return (true);
+    
+    if( node->left!=NULL && minValue(node->left) > node->data) return (false);
+    if(node->right!=NULL && maxValue(node->right)<= node->data) return (false);
+    
+    if( !isBST(node->left) || !isBST(node->right) ) return (true);
+    
+    return (true);
+}
+
+
+
 int main()
 {
-    struct node *head;
+    struct node* head, *head2;
     
     head=build12345();//build123c();
+    head2=build123c();
    // int ret=maxValue(head);//maxDepth(head);//size(head);
    // printf("%d \n",ret);
     
@@ -219,7 +300,19 @@ int main()
     // ret=hasPathSum(head,9);
     //printf("ret=%d \n",ret);
     
-    printPaths(head);
+   // printPaths(head);
+  // printPaths(head);
+  // struct node* temp= mirror(head);
+   //printPaths(temp);
+   //struct node* temp=doubleTree(head);
+  // printPaths(temp);
+ // int ret= sameTree(head,temp);
+  //printf("%d \n",ret);
+  
+ // int sum=countTrees(2);
+  //printf("%d \n",sum);
+  int ret = isBST(head);
+   printf("%d \n",ret);
     return 0;
 }
 
