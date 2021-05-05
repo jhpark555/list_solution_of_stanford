@@ -8,6 +8,7 @@ Code, Compile, Run and Debug online from anywhere in world.
 *******************************************************************************/
 #include <stdio.h>
 #include <stdbool.h>
+#include <limits.h>
 
 struct node{
     int data;
@@ -284,6 +285,22 @@ int isBST(struct node* node)
     return (true);
 }
 
+int isBSTRecur(struct node* node,int min,int max)
+{
+    if(node==NULL) return (true);
+    
+    if(node->data < min || node->data> max ) return ( false);
+    
+    return( 
+        isBSTRecur(node->left,min,node->data) &&
+        isBSTRecur(node->right,node->data+1,max)
+        );
+}
+int isBST2(struct node* node)
+{
+    return(isBSTRecur(node,INT_MAX,INT_MAX));
+    
+}
 
 
 int main()
@@ -311,7 +328,7 @@ int main()
   
  // int sum=countTrees(2);
   //printf("%d \n",sum);
-  int ret = isBST(head);
+  int ret = isBST2(head);
    printf("%d \n",ret);
     return 0;
 }
