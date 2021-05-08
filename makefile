@@ -1,7 +1,7 @@
 CC=gcc
 CFLAGS=-I.
 DEPS = 
-OBJ = dlDS_cr.o
+OBJ = poly_link.o
 
 %.o: %.c $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)
