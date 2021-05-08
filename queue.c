@@ -1,3 +1,6 @@
+
+/* Circular Array ueue and Linked list QUeue test */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <malloc.h>
@@ -94,8 +97,12 @@ struct Q *displayq(struct Q *q)
 
 void insert(int num)
 {
-  if(front==MAX-1) printf(" Overflow\n");
+  if(front==0 && front==MAX-1){
+  	 printf(" Overflow\n");
+	 return;
+  	}
   else if( front==-1 && rear==-1) front=rear=0;
+  else if( rear==MAX-1 && front !=0) rear =0;
   else rear++;
 
   queue[rear]=num;
@@ -106,16 +113,19 @@ int delete(void)
 {
   int val;
   
-  if(front==-1 && front >rear){
+  if(front==-1 && rear ==-1){
   	printf(" Underflow \n");
 	return -1;
   	}
+   val= queue[front];
+
+  if(front==rear) front=rear=-1;  
   else{
-     val=queue[front++];
-	 if(front>rear)
-	 	front=rear=-1;
-		return (val);
+     if(front ==MAX-1) front =0;
+	 else front++;
   	}
+
+  return (val);
 }
 
 void display()
@@ -123,7 +133,15 @@ void display()
   int i;
   if( front==-1 || rear==-1) printf("Empty\n");
   else{
-    for(i=front;i<=rear;i++) printf("%d ", queue[i]);
+  //	printf("f=%d r=%d \n",front,rear);
+  	if( front<=rear)
+      for(i=front;i<=rear;i++) printf("%d ", queue[i]);
+	else
+		{
+         for(i=front;i<MAX;i++)  printf("%d ",queue[i]);
+		 for(i=0;i<=rear;i++) printf("%d ",queue[i]);
+
+		}
 
   	}
 
@@ -131,18 +149,24 @@ void display()
 
 int main()
 {
-  //insert(10);
-  //insert(20);
-  //delete();
-  //display();
-   q= (struct Q*)malloc(sizeof(struct Q));
-  
-  create_queue(q);
-  q= insertq(q,10);
-  q= insertq(q,20);
-    deleteq(q);
-	
-  displayq(q);
+  insert(10);
+  insert(20);
+  insert(30);
+    insert(40);
+ delete();
+ delete();
+ delete();
 
-  free(q);
+  display();
+  
+ //  q= (struct Q*)malloc(sizeof(struct Q));
+  
+//  create_queue(q);
+//  q= insertq(q,10);
+//  q= insertq(q,20);
+ //   deleteq(q);
+	
+ // displayq(q);
+
+ // free(q);
 }
