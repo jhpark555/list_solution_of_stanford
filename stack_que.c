@@ -117,10 +117,11 @@ void main(int argc,char *argv[])
 	 push_link(&top_link,10);
 	  push_link(&top_link,20);     // reference pointer
 	   push_link(&top_link,30);
-	//   push_link(&top_link,40);
+	   push_link(&top_link,40);
    
 	//top_link= pop_link(top_link);
 	//top_link= pop_link(top_link);
+	
 	 pop_link(&top_link);
 	pop_link(&top_link);
 	
