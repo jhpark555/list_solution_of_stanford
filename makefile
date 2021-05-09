@@ -1,7 +1,7 @@
 CC=gcc
 CFLAGS=-I.
 DEPS = 
-OBJ = Prilist.o
+OBJ = binary.o
 
 %.o: %.c $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)

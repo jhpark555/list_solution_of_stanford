@@ -47,7 +47,7 @@ struct node *delete(struct node *start)
 	if(start==NULL)
 		{
           printf("Underflow \n");
-		  return;
+		  return NULL;
 		}
 	else{
          start=start->next;
