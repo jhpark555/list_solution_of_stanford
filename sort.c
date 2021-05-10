@@ -74,6 +74,61 @@ void selection_sort(int arr[], int n)
 
 }
 
+
+void merge(int arr[],int beg,int mid,int end)
+{
+    int i=beg,j=mid+1,index=beg,temp[N],k;
+
+    while((i<=mid) &&(j<=end))
+    	{
+          if(arr[i]<arr[j] ) {
+              temp[index++]=arr[i++];
+          	}
+		  else{
+              temp[index++]=arr[j++];
+		  	}
+    	}
+    if(i>mid)
+    	{
+         while(j<=end)
+         	{
+              temp[index++]=arr[j++];			  
+
+         	}        
+
+    	}
+	else
+		{
+         while(i<=mid)
+         	{
+         	  temp[index++]=arr[i++];
+         	}
+
+		}
+    for(k=beg;k<index;k++)
+		{
+		arr[k]=temp[k];
+    	}
+    	
+
+}
+
+void merge_sort(int arr[],int beg,int end)
+{
+     int mid;
+
+	 if(beg<end)
+	 	{
+             mid=(beg+end)/2;
+
+			 merge_sort(arr,beg,mid);
+			 merge_sort(arr,mid+1,end);
+			 merge(arr,beg,mid,end);     
+
+	 	}
+
+}
+
 int main()
 {
   int i,temp,j,arr[N]={29,9,45,63,18,81,108,54,72,36};
@@ -104,10 +159,12 @@ printf("\n");
 //  insertion_sort(arr,N);
 //  for(i=0;i<N;i++) printf("%d ",arr[i]);
 
-    selection_sort(arr,N);
+  //  selection_sort(arr,N);
+ // for(i=0;i<N;i++) printf("%d ",arr[i]);
+
+     merge_sort(arr,0,N-1);
   for(i=0;i<N;i++) printf("%d ",arr[i]);
 
-  
   return 0;
 
 }
