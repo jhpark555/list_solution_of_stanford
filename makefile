@@ -1,7 +1,7 @@
 CC=gcc
 CFLAGS=-I.
 DEPS = 
-OBJ = binary.o
+OBJ = sort.o
 
 %.o: %.c $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)

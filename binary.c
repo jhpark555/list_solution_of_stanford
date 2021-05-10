@@ -50,6 +50,25 @@ int interpolation_search(int arr[],int low,int high,int val)
   	}
     return -1;
 }
+
+int jump_search(int arr[],int low,int high, int val,int n)
+{
+   int step,i;
+
+   step=sqrt(n);
+   for(i=0;i<step;i++){
+        if(val < arr[step] ) high=step-1;
+		else low=step+1;
+   	}
+   for(i=low;i<high;i++)
+   	{
+      if(arr[i]==val) return (i+1);
+
+   	}
+   return -1;
+
+}
+
 int main(int argc, char *argv[])
 {
    int i;
@@ -63,8 +82,9 @@ int main(int argc, char *argv[])
 
    for(i=0;i<n;i++) printf("%d ",arr[i]);
 
-   num=10;
-    
+   num=34;
+
+	/*=====================   binary search ===========================  */
    while(beg<=end){
    	
     mid= (beg+end)/2;
@@ -85,11 +105,21 @@ int main(int argc, char *argv[])
    	}
     if(beg >end && found ==0) printf("%d is not exist \n",num);
 
-    /* interpolation search  */
+	
+
+    /*=================== interpolation search=======================  */
 
 	int pos= interpolation_search(arr,beg,end,num);
 
 	printf("Position is %d \n",pos);
+
+
+    /* ====================jump search ================================*/
+	pos= jump_search(arr,beg,end,num,n);
+
+	printf("*position is %d \n",pos);
+
+	
 	return 0;
 
 }
