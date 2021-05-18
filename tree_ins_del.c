@@ -1,9 +1,5 @@
 /******************************************************************************
 
-Welcome to GDB Online.
-GDB online is an online compiler and debugger tool for C, C++, Python, PHP, Ruby, 
-C#, VB, Perl, Swift, Prolog, Javascript, Pascal, HTML, CSS, JS
-Code, Compile, Run and Debug online from anywhere in world.
 
 *******************************************************************************/
 #include <stdio.h>
@@ -187,6 +183,52 @@ struct node *deleteElement(struct node *tree, int val)
 }
 
 #endif
+
+int totalNodes(struct node *tree)
+{
+    if(tree ==NULL) return 0;
+    else
+     return( totalNodes(tree->left)+totalNodes(tree->right)+1);
+}
+int totalExternalNodes(struct node *tree)
+{
+    if(tree==NULL) return 0;
+    else if( (tree->left==NULL)&&(tree->right==NULL)) return 1;
+    else
+     return( totalExternalNodes(tree->left)+totalExternalNodes(tree->right));
+}
+
+int totalInterNodes(struct node *tree)
+{
+    if(tree==NULL) return 0;
+    else
+     return( totalInterNodes(tree->left)+totalInterNodes(tree->right)+1);
+}
+
+int Height(struct node *tree)
+{
+    int leftheight,rightheight;
+    
+    if(tree==NULL) return 0;
+    else{
+    leftheight=Height(tree->left);
+    rightheight=Height(tree->right);
+    
+    if(leftheight > rightheight) return(leftheight +1);
+    else return(rightheight+1);
+    }
+}
+struct node *deletetree(struct node *tree)
+{
+    if(tree!=NULL)
+    {
+        deletetree(tree->left);
+        deletetree(tree->right);
+        free(tree);
+    }
+}
+
+
 int main()
 {
     struct node *tree=NULL;
@@ -218,6 +260,12 @@ int main()
     
     ret=deleteElement(tree,80);
      inorderTraversal(ret);
+     
+    int nodes= totalNodes(tree);
+    int totalExt=totalExternalNodes(tree);
+    int intnodes=totalInterNodes(tree);
+    int height=Height(tree);
+    printf("\n Nodes=%d ext nodes=%d internal node=%d height=%d",nodes,totalExt,intnodes,height);
     return 0;
 }
 
