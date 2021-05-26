@@ -1,8 +1,5 @@
 /******************************************************************************
 
-                            Online C Compiler.
-                Code, Compile, Run and Debug C program online.
-Write your code in this editor and press "Run" button to compile and execute it.
 
 *******************************************************************************/
 
@@ -31,8 +28,8 @@ void enQueue(struct node **queue, int *rear, struct node *new_node)  // see why 
 
 struct node *deQueue(struct node **queue,int *front)
 {
-    (*front)++;       // caution for (*ptr)++.   this is ptr value increase.
-    return queue[*front-1];
+   // (*front)++;       // caution for (*ptr)++.   this is ptr value increase.
+    return queue[(*front)++];
 }
 
 struct node *new_node(int data)
@@ -76,7 +73,7 @@ int main()
     root->left=new_node(2);
     root->right=new_node(3);
     root->left->left=new_node(4);
-    root->right->right=new_node(5);
+    root->right->right=new_node(6);
     
     printLevelOrder(root);
 
