@@ -33,20 +33,20 @@ char T2[MAX]= { 3,5,2,6};
 
 int main(int argc,char *argv)
 {
-	int option;	
+	int option;
     struct node* head =NULL ;    // NULL is important here!!!!
      struct node* head1 =NULL ;    // NULL is important here!!!!
       struct node* head2 =NULL ;    // NULL is important here!!!!
-	
+
 	start =create_all(head,T1);
-	display(start);  
+	display(start);
 
 	start1 = create_all(head1,T2);
 	display(start1);
-	
+
     start3 = sub_poly(start,start1,start3);
 	display(start3);
-	
+
   return 0;
 }
 
@@ -66,13 +66,13 @@ struct node* create_all(struct node* start,char a[])
 		  start=new_node;
 	  }
 	  else
-	  {  
+	  {
 	      ptr=start;
          while(ptr->next!=NULL)
 		 	ptr=ptr->next;
 			ptr->next=new_node;
 			new_node->next=NULL;
-	  } 
+	  }
 	}
       return ( start);
 }
@@ -88,7 +88,7 @@ struct node* display(struct node* start)
 	ptr=ptr->next;
    }
    printf("\n");
-   
+
    return(start);
 
 }
@@ -102,14 +102,14 @@ struct node* add_node(struct node* start,int num,int coeff)
      new_node->data=num;
 	 new_node->coeff=coeff;
 
-    if(start==NULL){     
+    if(start==NULL){
 	   new_node->next=NULL;
 	   start=new_node;
     	}
 	else{
-	 while(ptr->next!=NULL) 
+	 while(ptr->next!=NULL)
 	 	ptr=ptr->next;
-	 
+
 		new_node->next=NULL;
 		ptr->next=new_node;
 	}
@@ -124,7 +124,7 @@ struct node* add_poly(struct node* start1,struct node* start2, struct node* star
     struct node* ptr1=start1,*ptr2=start2;
 	int sum_num,c;
 
-	while(ptr1!=NULL && ptr2!=NULL){     
+	while(ptr1!=NULL && ptr2!=NULL){
 
 	   if(ptr1->coeff==ptr2->coeff){
 	   	  sum_num=ptr1->data+ptr2->data;
@@ -200,11 +200,8 @@ struct node* sub_poly(struct node* start1,struct node* start2, struct node* star
 	   	start3 =add_node(start3,ptr1->data,ptr1->coeff);
 		 ptr1=ptr1->next;
        	}
-	} 
-  
+	}
+
    return (start3);
 
 }
-
-
-

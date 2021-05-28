@@ -7,16 +7,16 @@ void selection_sort(int arr[],int n);
 int smallest(int arr[],int k,int n)
 {
    int pos=k,small=arr[k],i;
-   
+
    for(i=k+1;i<n;i++)
    	{
-      if(arr[i] <small ) 
+      if(arr[i] <small )
       	{
       	small=arr[i];
 		pos=i;
       	}
    	}
-   
+
    return (pos);
 }
 
@@ -31,13 +31,13 @@ void selection_sort(int arr[],int n)
 	  arr[k]=arr[pos];
 	  arr[pos]=temp;
    	}
- 
+
 }
 
 int interpolation_search(int arr[],int low,int high,int val)
 {
    int mid;
-   
+
   while(low<=high )
   	{
        mid=low+(high-low)*((val-arr[low])/(arr[high]-arr[low]));
@@ -76,7 +76,7 @@ int main(int argc, char *argv[])
    int num;   // search number
    int beg=0,end=n-1,mid,found =0;
    int arr[]={4,2,3,6,5,1,7,9,8,10,13,15,26,54,34};
-   
+
 
    selection_sort(arr,n);
 
@@ -86,7 +86,7 @@ int main(int argc, char *argv[])
 
 	/*=====================   binary search ===========================  */
    while(beg<=end){
-   	
+
     mid= (beg+end)/2;
 
 	if(arr[mid] ==num)
@@ -105,7 +105,7 @@ int main(int argc, char *argv[])
    	}
     if(beg >end && found ==0) printf("%d is not exist \n",num);
 
-	
+
 
     /*=================== interpolation search=======================  */
 
@@ -119,9 +119,7 @@ int main(int argc, char *argv[])
 
 	printf("*position is %d \n",pos);
 
-	
+
 	return 0;
 
 }
-
-

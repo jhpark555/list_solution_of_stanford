@@ -16,11 +16,11 @@ struct node *insertElement(struct node *tree,int val)
 {
     struct node *ptr,*nodeptr,*parentptr;
     ptr=(struct node *)malloc(sizeof(struct node ));
-    
+
     ptr->data=val;
     ptr->left=NULL;
     ptr->right=NULL;
-    
+
     if(tree==NULL)
     {
         tree=ptr;
@@ -39,7 +39,7 @@ struct node *insertElement(struct node *tree,int val)
         }
         if(val<parentptr->data) parentptr->left=ptr;
         else parentptr->right=ptr;
-        
+
     }
     return tree;
 }
@@ -52,7 +52,7 @@ void preorderTraversal(struct node *tree)
         preorderTraversal(tree->left);
         preorderTraversal(tree->right);
     }
-    
+
 }
 void inorderTraversal(struct node *tree)
 {
@@ -96,7 +96,7 @@ struct node *minvalueNode(struct node *tree)
 struct node *deleteElement(struct node *tree,int val)
 {
     struct node *current,*parent,*suc,*psuc,*ptr;
-    
+
     if(tree->left==NULL)
     {
         printf("\n The tree is empty ");
@@ -140,7 +140,7 @@ struct node *deleteElement(struct node *tree,int val)
     }
     if(parent->left==current)
         parent->left=ptr;
-    else 
+    else
         parent->right=ptr;
     free(current);
     return (tree);
@@ -149,10 +149,10 @@ struct node *deleteElement(struct node *tree,int val)
 struct node *deleteElement(struct node *tree, int val)
 {
     if(tree ==NULL) return tree;
-    
-    if(val<tree->data) 
+
+    if(val<tree->data)
        tree->left=deleteElement(tree->left,val);
-    else if(val > tree->data) 
+    else if(val > tree->data)
        tree->right=deleteElement(tree->right,val);
     else
     {
@@ -170,12 +170,12 @@ struct node *deleteElement(struct node *tree, int val)
         // node with two children:
         // Get the inorder successor
         // (smallest in the right subtree)
-        
+
         struct node *temp=minvalueNode(tree->right);
          // Copy the inorder
         // successor's content to this node
         tree->data=temp->data;
-        
+
         // Delete the inorder successor
         tree->right=deleteElement(tree->right,temp->data);
     }
@@ -208,12 +208,12 @@ int totalInterNodes(struct node *tree)
 int Height(struct node *tree)
 {
     int leftheight,rightheight;
-    
+
     if(tree==NULL) return 0;
     else{
     leftheight=Height(tree->left);
     rightheight=Height(tree->right);
-    
+
     if(leftheight > rightheight) return(leftheight +1);
     else return(rightheight+1);
     }
@@ -233,7 +233,7 @@ int main()
 {
     struct node *tree=NULL;
     struct node *ret=NULL;
-    
+
     tree=insertElement(tree,50);
       tree=insertElement(tree,30);
         tree=insertElement(tree,20);
@@ -241,26 +241,26 @@ int main()
            tree=insertElement(tree,70);
             tree=insertElement(tree,60);
              tree=insertElement(tree,80);
-          
-          
-          
+
+
+
     preorderTraversal(tree);
     printf("\n****************\n");
     inorderTraversal(tree);
     printf("\n****************\n");
     postorderTraversal(tree);
-    
+
     ret=findsmallestElement(tree);
     printf("\n****************\n");
     printf("SmallestElement=%d \n",ret->data);
-    
+
     ret=findlargestElement(tree);
     printf("\n****************\n");
     printf("LargestElement=%d \n",ret->data);
-    
+
     ret=deleteElement(tree,80);
      inorderTraversal(ret);
-     
+
     int nodes= totalNodes(tree);
     int totalExt=totalExternalNodes(tree);
     int intnodes=totalInterNodes(tree);
@@ -268,4 +268,3 @@ int main()
     printf("\n Nodes=%d ext nodes=%d internal node=%d height=%d",nodes,totalExt,intnodes,height);
     return 0;
 }
-

@@ -62,7 +62,7 @@ struct Q *insertq(struct Q *q,int num)
 struct Q *deleteq(struct Q *q)
 {
    struct node *ptr= q->front;
-   
+
   if(q->front ==NULL) {
   	printf(" Empth \n");
 	return NULL;
@@ -112,14 +112,14 @@ void insert(int num)
 int delete(void)
 {
   int val;
-  
+
   if(front==-1 && rear ==-1){
   	printf(" Underflow \n");
 	return -1;
   	}
    val= queue[front];
 
-  if(front==rear) front=rear=-1;  
+  if(front==rear) front=rear=-1;
   else{
      if(front ==MAX-1) front =0;
 	 else front++;
@@ -158,14 +158,14 @@ int main()
  delete();
 
   display();
-  
+
  //  q= (struct Q*)malloc(sizeof(struct Q));
-  
+
 //  create_queue(q);
 //  q= insertq(q,10);
 //  q= insertq(q,20);
  //   deleteq(q);
-	
+
  // displayq(q);
 
  // free(q);

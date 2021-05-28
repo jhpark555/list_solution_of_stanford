@@ -31,14 +31,14 @@ struct node* sort_list(struct node*);
 
 int main(int argc,char *argv)
 {
-	int option;	
+	int option;
     struct node* head =NULL ;    // NULL is important here!!!!
-	
+
 	start =create_all(head);
-	display(start);  
-	
+	display(start);
+
 	//head=insert_beg(start,0);
-	//display(head);  
+	//display(head);
 
 	//head=insert_end(start,99);
 	//display(head);
@@ -54,10 +54,10 @@ int main(int argc,char *argv)
 
 	//head=delete_end(start);
 	//display(head);
-	
+
 	//head =delete_node(start,4);
 	//display(head);
-	
+
 	//head=delete_after(start,2);
 	//display(head);
 
@@ -69,7 +69,7 @@ int main(int argc,char *argv)
 
 	//head=sort_list(start);
 	//display(head);
-	
+
   return 0;
 }
 
@@ -89,14 +89,14 @@ struct node* create_all(struct node* start)
 		  start=new_node;
 	  }
 	  else
-	  {  
+	  {
 	      ptr=start;
          while(ptr->next!=NULL)
 		 	ptr=ptr->next;
 			ptr->next=new_node;
 			new_node->prev=ptr;
 			new_node->next=NULL;
-	  } 
+	  }
 	}
       return ( start);
 }
@@ -112,7 +112,7 @@ struct node* display(struct node* start)
 	ptr=ptr->next;
    }
    printf("\n");
-   
+
    return(start);
 
 }
@@ -134,13 +134,13 @@ struct node* insert_end(struct node* start,int num)
 {
    struct node* new_node=(struct node*)malloc(sizeof(struct node));
    struct node* ptr;
-  
+
    ptr=start;
    while(ptr->next!=NULL){
       ptr=ptr->next;
    	}
    ptr->next=new_node;
-   
+
    new_node->data=num;
    new_node->next=NULL;
    new_node->prev=ptr;
@@ -161,10 +161,10 @@ struct node* insert_before(struct node* start,int which, int num)
    new_node->next=ptr;
    new_node->prev=ptr->prev;
    new_node->data=num;
-   
+
    ptr->prev->next=new_node;
    ptr->prev=new_node;
-   
+
    return(start);
 
 }
@@ -180,12 +180,12 @@ struct node* insert_after(struct node* start,int which,int num)
      ptr=ptr->next;
    	}
    new_node->data=num;
-   
+
    new_node->next=ptr->next;
    new_node->prev=ptr;
    ptr->next=new_node;
    ptr->next->prev=new_node;
-   
+
    return(start);
 }
 
@@ -195,7 +195,7 @@ struct node* delete_beg(struct node* start)
 
    start=start->next;
    start->prev=NULL;
-   
+
    free(ptr);
 
    return(start);
@@ -203,14 +203,14 @@ struct node* delete_beg(struct node* start)
 }
 
 struct node* delete_end(struct node* start)
-{ 
+{
    struct node* ptr=start;
- 
+
    while(ptr->next !=NULL){
    	ptr = ptr->next;
    	}
    ptr->prev->next=NULL;
-   
+
    free(ptr);
 
    return(start);
@@ -247,14 +247,14 @@ struct node* delete_after(struct node*start,int which)
 	ptr=ptr->next;
    	}
     temp=ptr->next;
-	
+
 	ptr->next=temp->next;
 	temp->next->prev=ptr;
-	
-		
+
+
    free(temp);
   return(start);
-  
+
 }
 
 struct node* delete_before(struct node*start,int which)
@@ -264,7 +264,7 @@ struct node* delete_before(struct node*start,int which)
    while(ptr->data!=which){
 	ptr=ptr->next;
    	}
-   
+
     temp=ptr->prev;
 
 	if(temp==start)  start=delete_beg(start);
@@ -272,10 +272,10 @@ struct node* delete_before(struct node*start,int which)
 	ptr->prev=temp->prev;
 	temp->prev->next=ptr;
 		}
-		
+
    free(temp);
   return(start);
-  
+
 }
 
 
@@ -290,7 +290,7 @@ struct node* delete_list(struct node* start)
 	//ptr=start;
    //	}
    while(ptr!=NULL) start=delete_beg(start);
-   
+
    return(start);
 }
 

@@ -29,14 +29,14 @@ struct node* sort_list(struct node*);
 
 int main(int argc,char *argv)
 {
-	int option;	
+	int option;
     struct node* head =NULL ;    // NULL is important here!!!!
-	
+
 	start =create_all(head);
-	display(start);  
-	
+	display(start);
+
 	//head=insert_beg(start,0);
-	//display(head);  
+	//display(head);
 
 	//head=insert_end(start,99);
 	//display(head);
@@ -62,7 +62,7 @@ int main(int argc,char *argv)
 
 	head=sort_list(start);
 	display(head);
-	
+
   return 0;
 }
 
@@ -81,13 +81,13 @@ struct node* create_all(struct node* start)
 		  start=new_node;
 	  }
 	  else
-	  {  
+	  {
 	      ptr=start;
          while(ptr->next!=NULL)
 		 	ptr=ptr->next;
 			ptr->next=new_node;
 			new_node->next=NULL;
-	  } 
+	  }
 	}
       return ( start);
 }
@@ -103,7 +103,7 @@ struct node* display(struct node* start)
 	ptr=ptr->next;
    }
    printf("\n");
-   
+
    return(start);
 
 }
@@ -124,13 +124,13 @@ struct node* insert_end(struct node* start,int num)
 {
    struct node* new_node=(struct node*)malloc(sizeof(struct node));
    struct node* ptr;
-  
+
    ptr=start;
    while(ptr->next!=NULL){
       ptr=ptr->next;
    	}
    ptr->next=new_node;
-   
+
    new_node->data=num;
    new_node->next=NULL;
 
@@ -148,7 +148,7 @@ struct node* insert_before(struct node* start,int which, int num)
    	preptr=ptr;
    	ptr=ptr->next;
    }
- 
+
    preptr->next=new_node;
    new_node->next=ptr;
    new_node->data=num;
@@ -178,7 +178,7 @@ struct node* delete_beg(struct node* start)
    struct node* ptr= start;
 
    start=start->next;
-   
+
    free(ptr);
 
    return(start);
@@ -186,10 +186,10 @@ struct node* delete_beg(struct node* start)
 }
 
 struct node* delete_end(struct node* start)
-{ 
+{
    struct node* ptr=start;
    struct node* preptr;
- 
+
    while(ptr->next !=NULL){
    	preptr=ptr;
    	ptr = ptr->next;
@@ -235,7 +235,7 @@ struct node* delete_after(struct node*start,int which)
    preptr->next=ptr->next;
    free(ptr);
   return(start);
-  
+
 }
 
 struct node* delete_list(struct node* start)

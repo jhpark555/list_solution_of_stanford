@@ -251,7 +251,7 @@ struct node *Append(struct node** aref, struct node ** bref)
 void FrontBackSplit(struct node* source,struct node**frontref,struct node** backref)
 {
     struct node* current=source;
-    int count=1,fh,bh;
+    int count=1,fh,bh,i;
 
     while(current->next!=NULL){
         count++;
@@ -269,7 +269,7 @@ void FrontBackSplit(struct node* source,struct node**frontref,struct node** back
     }
     else{
         int hopcount=(count-1)/2;
-        for(int i=0;i<hopcount;i++){
+        for(i=0;i<hopcount;i++){
             current=current->next;
               printf("**data=%d \n",current->data);
         }

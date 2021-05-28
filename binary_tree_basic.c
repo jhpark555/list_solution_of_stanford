@@ -27,7 +27,7 @@ int lookup(struct node* node,int target)
 
 struct node* NewNode(int data)
 {
-    struct node* node=malloc(sizeof(struct node));
+    struct node* node=(struct node*)malloc(sizeof(struct node));
     node->data=data;
     node->left=NULL;
     node->right=NULL;
@@ -177,7 +177,8 @@ int hasPathSum(struct node* node,int sum)
 
 void printArray(int *path,int pathLen)
 {
-    for(int i=0;i<pathLen;i++)
+  int i;
+    for(i=0;i<pathLen;i++)
      printf("%d ",path[i]);
 
      printf("\n");

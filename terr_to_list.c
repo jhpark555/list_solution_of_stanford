@@ -30,37 +30,37 @@ static void join(Node a, Node b)
 static Node append(Node a, Node b)
 {
     Node aLast, bLast;
-    
+
     if(a==NULL) return(b);
     if(b==NULL) return(a);
-    
+
     aLast=a->small;
     bLast=b->small;
-    
+
     join(aLast,b);
     join(bLast,a);
-    
+
     return(a);
-    
+
 }
 
 static Node treeTolist(Node root)
 {
     Node aList,bList;
-    
+
     if(root==NULL) return(NULL);
-    
+
     aList=treeTolist(root->small);
     bList=treeTolist(root->large);
-    
+
     root->small=root;
     root->large=root;
-    
+
     aList=append(aList,root);
     aList=append(aList,bList);
-    
+
     return(aList);
-    
+
 }
 
 static Node newNode(int data)
@@ -69,7 +69,7 @@ static Node newNode(int data)
     node->data=data;
     node->small=NULL;
     node->large=NULL;
-    
+
     return(node);
 }
 
@@ -90,7 +90,7 @@ static void printList(Node head)
         printf("%d ",current->data);
         current=current->large;
         if(current==head) break;
-        
+
     }
     printf("\n");
 }
@@ -99,16 +99,16 @@ int main()
 {
     Node root=NULL;
     Node head;
-    
+
     treeInsert(&root,4);
     treeInsert(&root,2);
     treeInsert(&root,1);
     treeInsert(&root,3);
     treeInsert(&root,5);
-    
+
     head=treeTolist(root);
-    
+
     printList(head);
-   
+
     return 0;
 }

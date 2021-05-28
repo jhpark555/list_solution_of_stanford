@@ -38,7 +38,7 @@ struct node *new_node(int data)
     temp->data=data;
     temp->left=NULL;
     temp->right=NULL;
-    
+
     return temp;
 }
 
@@ -47,7 +47,7 @@ void printLevelOrder(struct node *root)
     int rear,front;
     struct node **queue=createQueue(&front,&rear);
     struct node *temp_node=root;
-    
+
     while(temp_node)
     {
         printf("%d ",temp_node->data);
@@ -57,7 +57,7 @@ void printLevelOrder(struct node *root)
         //enqueue right child
         if(temp_node->right)
          enQueue(queue,&rear,temp_node->right);
-         
+
          //deQueue
          temp_node=deQueue(queue,&front);
     }
@@ -65,16 +65,16 @@ void printLevelOrder(struct node *root)
 
 int main()
 {
-    
+
     struct node *root=NULL;
-    
+
     root=new_node(1);
-    
+
     root->left=new_node(2);
     root->right=new_node(3);
     root->left->left=new_node(4);
     root->right->right=new_node(6);
-    
+
     printLevelOrder(root);
 
     return 0;

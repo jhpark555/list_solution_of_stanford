@@ -23,9 +23,8 @@ int main()
       
       i++;
       n++;
-	  
+
   }
  // printf("%s ",str1);
 
 }
-

@@ -29,15 +29,15 @@ struct node* sort_list(struct node*);
 
 int main(int argc,char *argv)
 {
-	int option;	
+	int option;
     struct node* head =NULL ;    // NULL is important here!!!!
-	
+
 
 	start = create_cll(head);
 	display(start);
-	
+
 	//head=insert_beg(start,0);
-	//display(head);  
+	//display(head);
 
 	//head=insert_end(start,99);
 	//display(head);
@@ -63,7 +63,7 @@ int main(int argc,char *argv)
 
 	head=sort_list(start);
 	display(head);
-	
+
   return 0;
 }
 
@@ -83,13 +83,13 @@ struct node* create_cll(struct node* start)
 		  start=new_node;
 	  }
 	  else
-	  {  
+	  {
 	      ptr=start;
          while(ptr->next!=start)
 		 	ptr=ptr->next;
 			ptr->next=new_node;
 			new_node->next=start;
-	  } 
+	  }
 	}
       return ( start);
 }
@@ -105,7 +105,7 @@ struct node* display(struct node* start)
    }
    printf("%d ",ptr->data);
    printf("\n");
-   
+
    return(start);
 
 }
@@ -115,8 +115,8 @@ struct node* insert_beg(struct node* start,int num)
 {
     struct node* new_node=(struct node*) malloc(sizeof(struct node));
     struct node* ptr=start;
-	
-    new_node->data=num;   
+
+    new_node->data=num;
 
 	while(ptr->next!=start){
 		ptr=ptr->next;
@@ -132,13 +132,13 @@ struct node* insert_end(struct node* start,int num)
 {
    struct node* new_node=(struct node*)malloc(sizeof(struct node));
    struct node* ptr;
-  
+
    ptr=start;
    while(ptr->next!=start){
       ptr=ptr->next;
    	}
    ptr->next=new_node;
-   
+
    new_node->data=num;
    new_node->next=start;
 
@@ -156,7 +156,7 @@ struct node* insert_before(struct node* start,int which, int num)
    	preptr=ptr;
    	ptr=ptr->next;
    }
- 
+
    preptr->next=new_node;
    new_node->next=ptr;
    new_node->data=num;
@@ -197,10 +197,10 @@ struct node* delete_beg(struct node* start)
 }
 
 struct node* delete_end(struct node* start)
-{ 
+{
    struct node* ptr=start;
    struct node* preptr;
- 
+
    while(ptr->next !=start){
    	preptr=ptr;
    	ptr = ptr->next;
@@ -247,7 +247,7 @@ struct node* delete_after(struct node*start,int which)
    if(ptr==start) start=preptr->next;   // **
    free(ptr);
   return(start);
-  
+
 }
 
 struct node* delete_list(struct node* start)
@@ -256,11 +256,11 @@ struct node* delete_list(struct node* start)
 
    while(ptr->next!=start)
    	 start=delete_end(start);
-  
-	free(start);
-   
 
-   	
+	free(start);
+
+
+
    return(start);
 }
 
