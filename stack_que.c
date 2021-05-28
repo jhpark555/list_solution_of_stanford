@@ -24,7 +24,7 @@ int pop(int st[])
 {
   int val;
   if(top ==-1) printf("Stack underflow\n");
-  
+
   val=st[top--];
 
   return(val);
@@ -56,7 +56,7 @@ struct stack *push_link(struct stack **top,int val)
 {
    struct stack *new_node=(struct stack*)malloc(sizeof(struct stack));
    new_node->data=val;
-   
+
    if(*top==NULL){
    	new_node->next=NULL;
     *top=new_node;
@@ -76,9 +76,9 @@ struct stack *pop_link(struct stack **top)
    if(ptr==NULL) printf("Stack is Empty\n");
    else
    	{
-     	//printf("%d ",top->data);		
-   	    *top=(*top)->next;	   	
-		free(ptr);      
+     	//printf("%d ",top->data);
+   	    *top=(*top)->next;
+		free(ptr);
    	}
 
    return (*top);
@@ -98,7 +98,7 @@ struct stack *display_link(struct stack* top)
   return(top);
 }
 
-void main(int argc,char *argv[])
+int main(int argc,char *argv[])
 {
      //push(st,10);
 	// push(st,20);
@@ -107,24 +107,25 @@ void main(int argc,char *argv[])
 	// pop(st);
 	// pop(st);
 	// printf("x=%d \n",x);
-	 
+
 	// display(st);
 
 	//top_link= push_link(top_link,10);
 	//top_link= push_link(top_link,20);   // regular pointer
 		//top_link= push_link(top_link,30);
-		
+
 	 push_link(&top_link,10);
 	  push_link(&top_link,20);     // reference pointer
 	   push_link(&top_link,30);
 	   push_link(&top_link,40);
-   
+
 	//top_link= pop_link(top_link);
 	//top_link= pop_link(top_link);
-	
+
 	 pop_link(&top_link);
 	pop_link(&top_link);
-	
+
 	 display_link(top_link);
-   
+
+return 0;
 }

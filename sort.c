@@ -16,7 +16,7 @@ void bubble_sort(int arr[],int n)
               flag=1;
 			  temp=arr[j];
 			  arr[j]=arr[j+1];
-			  arr[j+1]=temp;			 
+			  arr[j+1]=temp;
           	}
       	}
 	  if(flag==0) return; //array is alreay sorted
@@ -92,9 +92,9 @@ void merge(int arr[],int beg,int mid,int end)
     	{
          while(j<=end)
          	{
-              temp[index++]=arr[j++];			  
+              temp[index++]=arr[j++];
 
-         	}        
+         	}
 
     	}
 	else
@@ -109,7 +109,7 @@ void merge(int arr[],int beg,int mid,int end)
 		{
 		arr[k]=temp[k];
     	}
-    	
+
 
 }
 
@@ -123,7 +123,7 @@ void merge_sort(int arr[],int beg,int end)
 
 			 merge_sort(arr,beg,mid);
 			 merge_sort(arr,mid+1,end);
-			 merge(arr,beg,mid,end);     
+			 merge(arr,beg,mid,end);
 
 	 	}
 
@@ -168,6 +168,3 @@ printf("\n");
   return 0;
 
 }
-
-
-
