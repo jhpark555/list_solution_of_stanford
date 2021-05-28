@@ -21,7 +21,7 @@ struct node *insert( struct node *start,int num,int pri)
 
 	ptr->data=num;
     ptr->priority = pri;
-	
+
 	if(start==NULL || pri< start->priority){
 		ptr->next=start;
 	    start=ptr;
