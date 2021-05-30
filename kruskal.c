@@ -75,26 +75,24 @@ void KruskalMST(struct Graph *graph)
 {
   int V =graph->V;
   struct Edge result[V];
-  struct subset *subsets;
+  struct subset subsets[V];//=(struct subset*)malloc(V*sizeof(struct subset));
 
   int e=0;
   int i=0;
   int v;
 
 
-  // Step 1: Sort all the edges in non-decreasing
-  // order of their weight. If we are not allowed to
-  // change the given graph, we can create a copy of
-  // array of edges
-  qsort(graph->edge,graph->E,sizeof(graph->edge[0]),myComp);
-
-  struct subset *subsets=(struct subset*)malloc(V*sizeof(struct subset));
-
   for(v=0; v< V;++v )
   {
     subsets[v].parent =v;
     subsets[v].rank =0;
   }
+
+  // Step 1: Sort all the edges in non-decreasing
+  // order of their weight. If we are not allowed to
+  // change the given graph, we can create a copy of
+  // array of edges
+  qsort(graph->edge,graph->E,sizeof(graph->edge[0]),myComp);
 
   while(e <V-1 && i <graph->E)
   {
