@@ -7,11 +7,10 @@
 struct node{
   int data;
   struct node* next;
-
 };
 
 struct node* start=NULL;
-struct node* create_all(struct node*);
+struct node* create_cll(struct node*);
 struct node* display(struct node*);
 struct node* insert_beg(struct node*,int);
 struct node* insert_end(struct node*,int);
