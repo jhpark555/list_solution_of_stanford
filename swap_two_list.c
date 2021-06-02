@@ -45,6 +45,7 @@ void display(struct node *head)
 
 }
 
+#if 0 //pjh
 struct node* swap(struct node*head)
 {
   struct node *current=head;
@@ -74,6 +75,39 @@ struct node* swap(struct node*head)
   current = head;
  return current;
 }
+#else
+ struct node *swap( struct node *head)
+ {
+   struct node *current=head;
+   struct node *Next=current->next;
+   struct node *temp;
+
+   head=current->next;
+
+   while(1)
+   {                  // before current->Next->temp->current->next...
+     Next=current->next;
+     temp=Next->next;
+
+
+     Next->next=current;
+    if(temp==NULL){
+     current->next=NULL;
+     break;
+    }
+     if(temp->next==NULL){
+       current->next=temp;
+       break;
+     }
+                     // after : next->current->temp->Next->current
+    current->next=temp->next;
+     current=temp;
+   }
+
+   current = head;
+  return current;
+ }
+#endif
 
 int main()
 {
