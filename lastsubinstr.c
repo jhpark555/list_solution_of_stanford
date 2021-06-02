@@ -24,10 +24,6 @@ int main()
             }
         }
 
-   //  if(wordsize==count)
-  //  printf("yes %d ",count/wordsize);
-   // else printf("No not here \n");
-
 
     return 0;
 }
