@@ -277,6 +277,24 @@ struct node *reverse(struct node* head)
     return(head);
 
 }
+
+struct node *reversenode(struct node *head)
+{
+    struct node *prev=NULL;
+    struct node *current=head;
+    struct node *next=NULL;
+
+    while(current!=NULL)
+    {
+      next=current->next;
+      current->next=prev;
+      prev=current;
+      current=next;
+    }
+    head=prev;
+
+    return(head);
+}
 int main()
 {
     struct node *test;
@@ -305,7 +323,9 @@ test=insertbeg(test,20);
     //printf("Hello World %d\n",l);
    display(test);
    printf("***\n");
-   test=reverse(test);
+// test=reverse(test);
+   test=reversenode(test);
+
     display(test);
     return 0;
 }
