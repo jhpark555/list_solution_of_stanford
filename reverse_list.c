@@ -291,7 +291,7 @@ struct node *reversenode(struct node *head)
       prev=current;
       current=next;
     }
-    head=prev;
+    head=prev;   //above current was null in while , so prev is new head
 
     return(head);
 }
