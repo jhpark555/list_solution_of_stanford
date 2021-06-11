@@ -25,6 +25,29 @@ struct node *buildonetwothree()
 
 }
 
+int countlist(struct node *head,int n)
+{
+  struct node *current=head;
+  int count=0;
+
+  while(current!=NULL)
+  {
+    count++;
+    current=current->next;
+  }
+
+  int first=count-n-1;
+//  printf("**first=%d \n",first);
+  current=head;
+
+  for(count=0; count!=first;count++)
+    current=current->next;
+  int ret=current->data;
+
+  return ret;
+}
+
+
 int length(struct node* start)
 {
     int i=0;
@@ -658,7 +681,7 @@ struct node *rearrangeevenoddreverse(struct node *head)
    return(head);
 }
 
-#if 1
+#if 0
 void segregateevenodd(struct node **head)
 {
    struct node *current=*head;
@@ -732,8 +755,7 @@ void segregateevenodd(struct node **head)
     {
         if(evenstart==NULL)
           {
-          evenstart=current;
-          evenend=evenstart;
+          evenend=evenstart=current;
         }
         else
         {
@@ -745,8 +767,7 @@ void segregateevenodd(struct node **head)
    {
          if(oddstart==NULL)
          {
-           oddstart=current;
-           oddend=oddstart;
+           oddend=oddstart=current;
          }
          else
          {
@@ -760,17 +781,83 @@ void segregateevenodd(struct node **head)
     if(oddstart==NULL || evenstart ==NULL)
      return;
 
+#if 1 //evenstart
      evenend->next=oddstart;
      oddend->next=NULL;
-
      *head=evenstart;
-
+#else
+    oddend->next=evenstart;
+    evenend->next=NULL;
+    *head=oddstart;
+#endif
 
 }
 #endif
 
+#if 1
+int **countsumpair(struct node *a,struct node *b,int x)
+{
+    struct node *p1=a;
+    struct node *p2=b;
+    int a_buf[10]={0};
+    int b_buf[10]={0};
+    int i=0,j;
+    int counta=0,countb=0;
 
+    while(p1!=NULL)
+    {
+      a_buf[i++]=p1->data;
+    //  printf("%d ",p1->data);
+      p1=p1->next;
+      counta++;
+    }
+    i=0;
 
+    while(p2!=NULL)
+    {
+      b_buf[i++]=p2->data;
+      p2=p2->next;
+      countb++;
+    }
+int **v ;
+v= (int**)malloc(sizeof(int*)*4);   //row
+for(i=0;i<4;i++)
+  v[i]=(int*)malloc(4*sizeof(int)); //COL
+
+  int k=0;
+  int ret=0;
+   for(i=0;i<counta;i++)
+     for(j=0;j<countb;j++)
+     {
+      // if(a_buf[i]+b_buf[j] == x) {v[k][0]=i,v[k][1]=j; k++};
+       if(a_buf[i]+b_buf[j] == x)
+       {
+         v[k][0]=a_buf[i]; v[k][1]=b_buf[j];  k++;
+         ret++;
+       }
+     }
+//  for(i=0;i<k;i++) printf("i:j=%d  %d\n",v[i][0],v[i][1]);
+
+return v;
+  //return ret;
+
+}
+#else
+int countsumpair(struct node *a,struct node *b,int x)
+{
+  int count=0;
+  struct node *p1;
+  struct node *p2;
+
+  for(p1=a;p1!=NULL;p1=p1->next)
+    for(p2=b;p2!=NULL;p2=p2->next)
+    {
+      if(p1->data + p2->data ==x) count ++;
+    }
+
+  return count;
+}
+#endif
 int main()
 {
   struct node *head;
@@ -851,5 +938,16 @@ printf("\nrearrange rever :");display(front);
 printf("\n-----------------------------\n");
 segregateevenodd(&front);
 printf("\nsegregate :");display(front);
+printf("\n-----------------------------\n");
+//int x= countlist(front,3);
+//printf("**%d \n",x);
+front=0; back=0;
+push(&front,7);push(&front,5);push(&front,1);push(&front,3);push(&back,8);
+push(&back,2);push(&back,5);push(&back,3);
+//display(front);
+int **v=countsumpair(front,back,10);
+int i,j;
+for(i=0;i<2;i++)
+for(j=0;j<2;j++) printf("%d ",v[i][j]);
     return 0;
 }
