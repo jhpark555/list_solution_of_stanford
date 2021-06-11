@@ -658,6 +658,61 @@ struct node *rearrangeevenoddreverse(struct node *head)
    return(head);
 }
 
+void segregateevenodd(struct node **head)
+{
+   struct node *current=*head;
+   struct node *prev=NULL;
+   struct node *end=*head;
+
+   //get pointer at last nodes
+   while(end->next!=NULL)
+    end=end->next;
+
+   struct node *new_end=end;
+
+   //consider all odd nodes before the first even nodes
+
+   while(current->data %2 !=0 && current!=end)
+   {
+    new_end->next=current;
+    current=current->next;
+    new_end->next->next=NULL;
+    new_end=new_end->next;
+   }
+
+   if(current->data %2 ==0)
+   {
+     *head=current;
+     while(current!=end)
+     {
+       if(current->data%2 ==0)
+       {
+         prev=current;
+         current=current->next;
+       }
+       else
+       {
+         prev->next=current->next;
+         current->next=NULL;
+         new_end->next=current;
+         new_end=current;
+         current=prev->next;
+       }
+     }
+   }
+   else
+   {
+     prev=current;
+   }
+
+   if(new_end !=end && end->data%2 !=0)
+   {
+     prev->next=end->next;
+     end->next=NULL;
+     new_end->next=end;
+   }
+
+}
 
 int main()
 {
@@ -736,5 +791,8 @@ printf("\nrearrange :");display(front);
  printf("\n-----------------------------\n");
 front=rearrangeevenoddreverse(front);
 printf("\nrearrange rever :");display(front);
+printf("\n-----------------------------\n");
+segregateevenodd(&front);
+printf("\nsegregate :");display(front);
     return 0;
 }
