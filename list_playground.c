@@ -658,6 +658,7 @@ struct node *rearrangeevenoddreverse(struct node *head)
    return(head);
 }
 
+#if 1
 void segregateevenodd(struct node **head)
 {
    struct node *current=*head;
@@ -713,6 +714,62 @@ void segregateevenodd(struct node **head)
    }
 
 }
+#else
+void segregateevenodd(struct node **head)
+{
+  struct node *evenstart=NULL;
+  struct node *evenend=NULL;
+  struct node *oddstart=NULL;
+  struct node *oddend=NULL;
+
+  struct node *current=*head;
+
+  while(current!=NULL)
+  {
+    int val=current->data;
+
+    if(val %2 ==0)    //even
+    {
+        if(evenstart==NULL)
+          {
+          evenstart=current;
+          evenend=evenstart;
+        }
+        else
+        {
+          evenend->next=current;
+          evenend=evenend->next;
+        }
+  }
+   else
+   {
+         if(oddstart==NULL)
+         {
+           oddstart=current;
+           oddend=oddstart;
+         }
+         else
+         {
+           oddend->next=current;
+           oddend=oddend->next;
+         }
+   }
+    current=current->next;
+
+  }
+    if(oddstart==NULL || evenstart ==NULL)
+     return;
+
+     evenend->next=oddstart;
+     oddend->next=NULL;
+
+     *head=evenstart;
+
+
+}
+#endif
+
+
 
 int main()
 {
