@@ -33,6 +33,17 @@ struct node *newnode(int data)
   return(node);
 
 }
+struct node *minValueNode(struct node *node)
+{
+  struct node *current=node;
+/* loop down to find the leftmost leaf */
+  while(current && current->left!=NULL)
+    current=current->left;
+
+  return current;
+
+}
+
 /*
 T1, T2, T3 and T4 are subtrees.
                                                x
@@ -119,6 +130,76 @@ struct node *insert(struct node *node,int data)
   }
     return node;
 }
+
+
+struct node *deleteNode(struct node  *root,int data)
+{
+   if(root ==NULL) return root;
+
+   if(data < root->data)
+     root->left=deleteNode(root->left,data);
+   else if( data > root->data)
+     root->right=deleteNode(root->right,data);
+
+     // if key is same as root's key, then This is
+     // the node to be deleted
+   else
+   {
+     //node with only one child or no child
+     if(root->left ==NULL || root->right==NULL)
+     {
+       struct node *temp=root->left ? root->left:root->right;
+
+       //no chile case
+       if(temp==NULL)
+       {
+         temp=root;
+         root=NULL;
+       }
+      else  //one child
+       {
+        *root=*temp;   //copy the non-empty child
+        free(temp);
+       }
+    }
+    else
+    {
+      //node with two child: get inorder successor
+      struct node *temp=minValueNode(root->right);
+      // Copy the inorder successor's data to this node
+      root->data=temp->data;
+      // Delete the inorder successor
+      root->right = deleteNode(root->right,temp->data);
+     }
+  }
+
+  //if the tree had only one node then return
+  if(root==NULL) return root;
+//update height of the current nodes
+ root->height =1+max(height(root->left),height(root->right));
+
+ int balance = getBalance(root);
+ //if node is unstale , 4 cases to Rotate
+
+
+ if( balance >1 && getBalance(root->left) >=0)
+   return rightRotate(root);
+ if( balance >1 && getBalance(root->left) <0)
+ {
+   root->left=leftRotate(root->left);
+   return rightRotate(root);
+ }
+ if(balance < -1 && getBalance(root->right) <=0)
+   return leftRotate(root);
+ if( balance <-1 && getBalance(root->right)> 0)
+ {
+   root->right=rightRotate(root->right);
+   return leftRotate(root);
+ }
+  return root;
+
+}
+
 void inorder(struct node *temp)
 {
   if(temp==NULL) return;
@@ -138,16 +219,7 @@ void preorder(struct node *temp)
 
 
 }
-struct node *minValueNode(struct node *node)
-{
-  struct node *current=node;
-/* loop down to find the leftmost leaf */
-  while(current && current->left!=NULL)
-    current=current->left;
 
-  return current;
-
-}
 /*
 1) Node to be deleted is the leaf: Simply remove from the tree.
 
@@ -172,6 +244,7 @@ struct node *minValueNode(struct node *node)
                  /  \                            \
                 60   80                           80
 */
+#if 0
 struct node *deleteNode(struct node*root,int data)
 {
   if(root ==NULL){
@@ -212,16 +285,21 @@ struct node *deleteNode(struct node*root,int data)
   }
   return root;
 }
-
+#endif
 int main()
 {
   struct node *root=NULL;
+  root=insert(root,9);
+  root=insert(root,5);
   root=insert(root,10);
-  root=insert(root,20);
-  root=insert(root,30);
-  root=insert(root,40);
-  root=insert(root,50);
-  root=insert(root,25);
+  root=insert(root,0);
+  root=insert(root,6);
+  root=insert(root,11);
+  root=insert(root,-1);
+  root=insert(root,1);
+  root=insert(root,2);
+
+  root=deleteNode(root,10);
 
   printf("Preorder traverse of the constructed AVL \n");
   preorder(root);
