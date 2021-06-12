@@ -62,7 +62,7 @@ struct node *minValueNode(struct node *node)
               50                            50
            /     \         delete(30)      /   \
           30      70       --------->    40     70
-            \    /  \                          /  \ 
+            \    /  \                          /  \
             40  60   80                       60   80
 3) Node to be deleted has two children: Find inorder successor of the node. Copy contents of the inorder successor to the node and delete the inorder successor. Note that inorder predecessor can also be used.
 
@@ -79,8 +79,8 @@ struct node *deleteNode(struct node*root,int data)
     return root;
   }
 
-  if(root->data > data)
-    root->left=deleteNode(root->left,data);
+  if(root->data > data){
+    root->left=deleteNode(root->left,data); }
   else if(root->data < data)
     root->right=deleteNode(root->right,data);
     // if key is same as root's key,
@@ -101,9 +101,9 @@ struct node *deleteNode(struct node*root,int data)
      // node with two children:
     // Get the inorder successor
     // (smallest in the right subtree)
-
+//printf("**\n");
     struct node *temp=minValueNode(root->right);
-
+//printf("***temp=%d root=%d\n",temp->data,root->data);
     // Copy the inorder
     // successor's content to this node
       root->data=temp->data;
@@ -126,12 +126,12 @@ int main()
   insert(root,80);
   printf("Inorder traversal of the given tree \n");
   inorder(root);
-  printf("\nDelete 20\n");
-  deleteNode(root,20);
+  printf("\nDelete 30\n");
+  deleteNode(root,30);
   printf("Inorder traversal of the modified tree \n");
   inorder(root);
-  printf("\n");
-  deleteNode(root,60); inorder(root);
+//  printf("\n");
+//  deleteNode(root,70); inorder(root);
 //  root=insert(root,12);
 
 
