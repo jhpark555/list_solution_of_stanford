@@ -1,3 +1,27 @@
+/*
+Input: root node, key
+output: predecessor node, successor node
+
+1. If root is NULL
+      then return
+2. if key is found then
+    a. If its left subtree is not null
+        Then predecessor will be the right most
+        child of left subtree or left child itself.
+    b. If its right subtree is not null
+        The successor will be the left most child
+        of right subtree or right child itself.
+    return
+3. If key is smaller then root node
+        set the successor as root
+        search recursively into left subtree
+    else
+        set the predecessor as root
+        search recursively into right subtree
+*/
+
+
+
 #include<stdio.h>
 #include<stdlib.h>
 
@@ -20,6 +44,7 @@ struct node *newNode(int data)
   return(node);
 
 }
+//right node minimum sub tree node
 struct node *minValueNode(struct node *node)
 {
   struct node *current=node;
@@ -30,6 +55,16 @@ struct node *minValueNode(struct node *node)
   return current;
 
 }
+//left node maximum sub tree node
+struct node *maxValueNode(struct node *node)
+{
+  struct node *current=node;
+  while(current && current->right!=NULL)
+    current=current->right;
+
+  return current;
+}
+
 struct node* insert(struct node* node,
                     int data)
 {
@@ -56,18 +91,20 @@ void findPreSuc(struct node *root, struct node **pre,struct node **suc,int key)
     //maximum value in left subtree is predecessor
     if(root->left !=NULL)
     {
-      struct node *temp=root->left;
-      while(temp->right)
-        temp=temp->right;
-      *pre=temp;
+    //  struct node *temp=root->left;
+    //  while(temp->right)
+    //    temp=temp->right;
+    //  *pre=temp;
+    *pre=maxValueNode(root->left);
     }
     //maximum value in right subtree is Succeessor
     if(root->right!=NULL)
     {
-      struct node *temp=root->right;
-      while(temp->left)
-        temp=temp->left;
-      *suc=temp;
+    //  struct node *temp=root->right;
+    //  while(temp->left)
+    //    temp=temp->left;
+    //  *suc=temp;
+    *suc=minValueNode(root->right);
     }
     return;
   }
@@ -87,7 +124,7 @@ void findPreSuc(struct node *root, struct node **pre,struct node **suc,int key)
 int main()
 {
   struct node *root=NULL,*pre,*suc;
-  int key=55;
+  int key=65;
 
   root=insert(root,50);
   root=insert(root,30);
