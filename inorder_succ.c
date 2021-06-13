@@ -38,7 +38,7 @@ Go to right subtree and return the node with minimum key value in the right subt
 If right sbtree of node is NULL, then succ is one of the ancestors. Do the following.
 Travel up using the parent pointer until you see a node which is left child of its parent. The parent of such a node is the succ.
 */
-
+#if 0
 struct node *inOrderSuccessor(struct node *node,struct node *n)
 {
   //case 1.
@@ -52,7 +52,30 @@ struct node *inOrderSuccessor(struct node *node,struct node *n)
   }
   return p;
 }
+#else    //below method is more feasible
+struct node *inOrderSuccessor(struct node *root,struct node *n)
+{
+   if(n->right!=NULL)
+     return minValueNode(n->right);
+   struct node *succ=NULL;
 
+   while(root!=NULL)
+   {
+     if(n->data < root->data)
+     {
+       succ=root;
+       root=root->left;
+     }
+     else if(n->data> root->data)
+     {
+       root=root->right;
+     }
+     else
+      break;
+   }
+  return succ;
+}
+#endif
 struct node* insert(struct node* node,
                     int data)
 {
