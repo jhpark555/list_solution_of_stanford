@@ -6,15 +6,15 @@
 #define MAX(a,b) ((a>b)? a:b )
 #define INPUT 7
 
-float *decimation2(float arr[],int size,int M)
+void decimation2(float *arr,float **arr2,int size,int M)
 {
-    float *arr2=(float*)calloc(1,sizeof(float));
     int i,j=0;
+    float *ptr=*arr2;
 
     for (i = 0; i<size; i=i+M) {
-      arr2[j++] = arr[i];
+    ptr[j++] = arr[i];
+
     }
-  return arr2;
 }
 
 float* convolve(float h[], float x[], int lenH, int lenX, int* lenY)
@@ -62,11 +62,12 @@ int sizeH= sizeof(h)/sizeof(h[0]);
 int sizeX= sizeof(x)/sizeof(x[0]);
 
 float *y= convolve(h,x,sizeH,sizeX, &lenY );
+float *arr2=(float*)malloc(INPUT*sizeof(float));
 
 //decimation(y,lenY);
-float *arr2 = decimation2(y,lenY,M);
+decimation2(y,&arr2,lenY,M);
 
-for(i=0;i<lenY/M;i++) printf("%0.2f ",arr2[i]);
+for(i=0;i<lenY/M;i++) printf("%f ",arr2[i]);
 
 free(arr2);
 
