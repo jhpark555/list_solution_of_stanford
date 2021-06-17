@@ -24,11 +24,11 @@ int main()
 
  int min= -1, k=3;
 
- for(i=0;i<n;i++)
-  if( arr[i]==k) {
-      min=i;
-      break;
-    }
+// for(i=0;i<n;i++)
+//  if( arr[i]==k) {
+//      min=i;
+//      break;
+//    }
 min=findpeak(arr,n);
   printf("**%d \n",min);
 
