@@ -39,24 +39,25 @@ void display(struct node *head)
 
 }
 
-struct node* movenode(struct node *dst, struct node *src)
+void movenode(struct node **dst, struct node **src)
 {
-    struct node *New=src;
+    struct node *New=*src;
 
-    src=New->next;
-    New->next=dst;
-    dst=New;
-
-    return dst;
+    *src=New->next;
+    New->next=*dst;
+    *dst=New;
 }
+
 int main()
 {
       struct node *test;
       struct node *dst=NULL;
 
         test=buildonetwothree(1,2,3);
-      test=  movenode(dst,test);
-        display(test);
+       movenode(&dst,&test);
+        movenode(&dst,&test);
+           movenode(&dst,&test);
+        display(dst);
     return 0;
 
 }
