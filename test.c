@@ -4,7 +4,7 @@
 
 #define MIN(a,b) ( (a> b )?  b:a)
 #define MAX(a,b) ((a>b)? a:b )
-#define INPUT 7
+#define INPUT 20
 
 int decimation2(float *arr,float (*arr2)[],int size,int M)
 {
