@@ -1,29 +1,70 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-#define swap(a,b)  a^=b^=a^=b
+struct node{
+   int data;
+   struct node *left;
+   struct node *right;
+};
+
+struct node *insert(struct node *root,int key)
+{
+   if(root ==NULL)
+   {
+     struct node *newnode=(struct node*)malloc(sizeof(struct node));
+     newnode->data=key;
+     newnode->left=NULL;
+     newnode->right=NULL;
+     root=newnode;
+   }
+   else
+   {
+     if(key < root->data )
+       root->left=insert(root->left,key);
+     else
+       root->right=insert(root->right,key);
+   }
+
+   return root;
+}
+
+void printpreorder(struct node *root,int pre[])
+{
+  static int i=0;
+  if(root!=NULL)
+  {
+    //printf("%d ->",root->data);
+    pre[i++]=root->data;
+    printpreorder(root->left,pre);
+    printpreorder(root->right,pre);
+  }
+}
+
 
 int main()
 {
-   int arr[]={1,4,2,-1,6,5};
-  //int arr[]={1,2,3,4};
-   int  n= sizeof(arr)/sizeof(arr[0]);
+  struct node *root=NULL;
 
-   int i,j,temp;
+  int arr[]={ 15, 10, 8, 12, 20, 16, 25 };
+  int n=sizeof(arr)/sizeof(arr[0]);
+  int i;
+  int count=0;
+  int pre[n];
 
-   for(i=0;i<n;i++) for(j=0;j<n-i-1;j++)
-   {
-     if(arr[j]>arr[j+1]) {
-       swap(arr[j],arr[j+1]);
-     }
-   }
-   int this=0;
-   for(i=0;i<n;i++)
-   {
-     if(arr[i+1]-arr[i]>1 && arr[i]>0 ){
-        this=arr[i]+1; break;
-     }
-   }
-printf("**this =%d \n",this);
-  for(i=0;i<n;i++) printf("%d ",arr[i]);
+  for(i=0;i<n;i++)
+  {
+    root=insert(root,arr[i]);
+  }
+
+ printpreorder(root,pre);
+
+for(i=0;i<n;i++)
+{
+  if(arr[i]!=pre[i])  break;
+//  printf("%d %d :",pre[i],arr[i]);
+}
+
+if(i!=n) printf("\nNot preorder\n");
+else printf("\nIt's preorder\n");
+return 0;
 }
