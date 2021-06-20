@@ -67,10 +67,10 @@ void display(struct node *head)
        }
 
        struct node* current = *sourceRef;  // the front source node
-       //*sourceRef = (*sourceRef)->next;    // advance the source pointer
+       *sourceRef = (*sourceRef)->next;    // advance the source pointer
        current->next = *destRef;           // link the old dest off the new node
        *destRef = current;                 // move dest to point to the new node
-*sourceRef = (*sourceRef)->next; 
+
    }
 
 
