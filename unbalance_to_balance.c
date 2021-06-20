@@ -1,3 +1,6 @@
+//Construct a height-balanced BST from an unbalanced BST
+
+
 #include<stdio.h>
 #include<stdlib.h>
 
@@ -36,20 +39,23 @@ struct node *insert(struct node *root,int key)
    return root;
 }
 
-void printpreorder(struct node *root)
+void printpreorder(struct node *root,int arr[],int *count)
 {
-  static int i=0;
   if(root!=NULL)
   {
-    printf("%d ->",root->data);
-    printpreorder(root->left);
-    printpreorder(root->right);;
+  //  printf("%d ->",root->data);
+    arr[(*count)++]=root->data;
+    printpreorder(root->left,arr,count);
+    printpreorder(root->right,arr,count);;
   }
 }
 
 
 int main()
 {
+  int arr[100]={0};
+  int count=0,i;
+
   struct node *root=newNode(20);
   root->left=newNode(15);
   root->left->left=newNode(10);
@@ -58,8 +64,15 @@ int main()
   root->left->left->left->right=newNode(8);
 
 
- printpreorder(root);
+  printpreorder(root,arr,&count);
 
+  //for(i=0;i<count;i++) printf("%d->",arr[i]);
+
+  struct node *ans=NULL;
+
+  for(i=0;i<count;i++) insert(ans,arr[i]);
+
+  for(i=0;i<count;i++) printf("%d->",arr[i]);
 
 return 0;
 }
