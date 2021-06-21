@@ -48,16 +48,13 @@ void push(struct node *root,struct node **headref)
     headRef —> Reference to the head node of the doubly linked list
     n —> Stores the total number of nodes processed so far in the BST
 */
-void convertBSTtoSortedDLL(struct node *root,struct node **headref,int *n)
+void convertBSTtoSortedDLL(struct node *root,struct node **headref,int n)
 {
   if(root ==NULL)  return;
-  int *nn;
 
-  *nn=*n;
-   convertBSTtoSortedDLL(root,headref,nn);
+   convertBSTtoSortedDLL(root,headref,n);
    push(root,headref);
-  *nn= ++(*n);
-   convertBSTtoSortedDLL(root,headref,nn);
+   convertBSTtoSortedDLL(root,headref,++n);
 }
 
 /*
@@ -65,16 +62,12 @@ void convertBSTtoSortedDLL(struct node *root,struct node **headref,int *n)
     headRef —> Reference to the head node of the doubly linked list
     n —> Total number of nodes in the doubly linked list
 */
-struct node *convertSortedDLLToBST(struct node **headref,int *n)
+struct node *convertSortedDLLToBST(struct node **headref,int n)
 {
-  int *nn;
 
-  if( *n <0 )
-  {
-    return NULL;
-  }
-  *nn=*n/2;
-  struct node *leftSubTree =convertSortedDLLToBST(headref,nn);
+  if( n <0 )   return NULL;
+
+  struct node *leftSubTree =convertSortedDLLToBST(headref,n/2);
 
   // `headRef` now points to the middle node of the sorted DDL
 
@@ -87,8 +80,8 @@ struct node *convertSortedDLLToBST(struct node **headref,int *n)
   *headref=(*headref)->right;
 
 // recursively construct the right subtree with the remaining nodes
- *nn=*n-(*n/2+1);
-  root->right=convertSortedDLLToBST(headref,nn);
+
+  root->right=convertSortedDLLToBST(headref,n-(n/2+1));
 
 return root;
 
@@ -99,9 +92,9 @@ void constructBalancedBST(struct node *root)
    struct node *head=NULL;
    int counter =0;
 
-   convertBSTtoSortedDLL(root,&head,&counter);   //DLL
+   convertBSTtoSortedDLL(root,&head,counter);   //DLL
 
-  root= convertSortedDLLToBST(&head,&counter);
+  root= convertSortedDLLToBST(&head,counter);
 }
 
 int main()
