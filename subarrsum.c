@@ -25,7 +25,7 @@ int arr[]={ 5, 6, -5, 5, 3, 5, 3, -2, 0 };
         max=j-i+1;
       //  printf("max=%d \n",max);
         if(max>maxmax) maxmax=max;
-        for(k=i;k<=j;k++) printf("%d ",k);
+        for(k=i;k<=j;k++) printf("%d ",arr[k]);
     }
 
   }

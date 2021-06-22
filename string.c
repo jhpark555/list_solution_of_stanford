@@ -12,15 +12,15 @@ int main()
       	{
            n=i;
 
-	while(str2[j]!='\0')
-	{
-           str1[n]=str1[j];
-	    j++;
-            printf("%c",str1[n]);
-	}
+          	while(str2[j]!='\0')
+          	{
+                     str1[n]=str1[j];
+          	    j++;
+                      printf("%c",str1[n]);
+          	}
 
       	}
-      
+
       i++;
       n++;
 

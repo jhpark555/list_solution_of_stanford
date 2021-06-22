@@ -1,74 +1,48 @@
+//In-place merge two sorted arrays
+
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-
-#define MIN(a,b) ( (a> b )?  b:a)
-#define MAX(a,b) ((a>b)? a:b )
-#define INPUT 20
-
-int decimation2(float *arr,float (*arr2)[],int size,int M)
-{
-    int i,j=0;
-    float *ptr=*arr2;
-
-    for (i = 0; i<size; i=i+M) {
-    ptr[j++] = arr[i];
-
-    }
-    return j;
-}
-
-float* convolve(float h[], float x[], int lenH, int lenX, int* lenY)
-{
-
-      int nconv = lenH+lenX-1;
-  (*lenY) = nconv;
-  int i,j,h_start,x_start,x_end;
-
-  float *y = (float*) calloc(nconv, sizeof(float));
-
-  for (i=0; i<nconv; i++)
-  {
-    x_start = MAX(0,i-lenH+1);
-    x_end   = MIN(i+1,lenX);
-    h_start = MIN(i,lenH-1);
-    for(j=x_start; j<x_end; j++)
-    {
-      y[i] += h[h_start--]*x[j];
-    }
-  }
-  return y;
-
-}
-
+#define swap( a ,b )  (a^=b^=a^=b)
 int main()
 {
-float h[]= {-0.01452123, -0.0155227 ,  0.01667252,  0.01800633, -0.01957209,
-       -0.0214361 ,  0.02369253,  0.02647989, -0.03001054, -0.03462755,
-        0.04092347,  0.05001757, -0.06430831, -0.09003163,  0.15005272,
-        0.45015816,  0.45015816,  0.15005272, -0.09003163, -0.06430831,
-        0.05001757,  0.04092347, -0.03462755, -0.03001054,  0.02647989,
-        0.02369253, -0.0214361 , -0.01957209,  0.01800633,  0.01667252,
-       -0.0155227 , -0.01452123};
+  int x[]= { 1, 4, 7, 8, 10 };
+  int y[]= { 2, 3, 9 };
+  int nx=sizeof(x)/sizeof(x[0]);
+  int ny=sizeof(y)/sizeof(y[0]);
+  int nz=nx+ny;
+  int z[nz];
 
-float x[INPUT];
-int i;
-int lenY;
-int M=2;
-for(i=1;i<=INPUT;i++){
-    x[i-1]=i;
+  int i,j,k;
+  int sum=0;
+
+  for(i=0;i<nx;i++)
+  {
+    z[i]=x[i];
   }
 
-int sizeH= sizeof(h)/sizeof(h[0]);
-int sizeX= sizeof(x)/sizeof(x[0]);
+  for(j=i,i=0; i<ny ;i++,j++)
+  {
+    z[j]=y[i];
 
-float *y= convolve(h,x,sizeH,sizeX, &lenY );
-float arr2[INPUT];
+  }
 
-//decimation(y,lenY);
-int count= decimation2(y,&arr2,lenY,M);
+  for(i=0;i<nz;i++)
+   for(j=0;j<nz-i-1;j++)
+    if(z[j]>z[j+1])swap(z[j],z[j+1]);    //bubble sort 
 
-for(i=0;i<count;i++) printf("%f ",arr2[i]);
+//for(i=0;i<nz;i++) printf("%d ",z[i]);
 
-return 0;
+  for(i=0;i<nz;i++){      //seperate to each arrays
+    if(i<nx)
+     x[i]=z[i];
+     else
+     y[i-nx]=z[i];
+   }
+
+    for(i=0;i<nx;i++) printf("%d ",x[i]);  printf("\n");
+    for(i=0;i<ny;i++) printf("%d ",y[i]);
+
+  return 0;
 }
