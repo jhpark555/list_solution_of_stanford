@@ -4,45 +4,52 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#define swap( a ,b )  (a^=b^=a^=b)
+
+struct node
+{
+  int data;
+  struct node *next;
+};
+
+void printList(struct node *head)
+{
+  struct node *current=head;
+  while(current!=NULL)
+  {
+    printf("%d->",current->data);
+    current=current->next;
+  }
+}
+
+void push(struct node **head,int key)
+{
+  struct node *newNode=(struct node*)malloc(sizeof(struct node));
+
+  newNode->data=key;
+  newNode->next=*head;
+  *head=newNode;
+}
+
+
 int main()
 {
-  int x[]= { 1, 4, 7, 8, 10 };
-  int y[]= { 2, 3, 9 };
-  int nx=sizeof(x)/sizeof(x[0]);
-  int ny=sizeof(y)/sizeof(y[0]);
-  int nz=nx+ny;
-  int z[nz];
+  // input keys
+  int keys[] = {6, 3, 4, 8, 2, 9};
+  int n = sizeof(keys)/sizeof(keys[0]);
+  int i;
+  // points to the head node of the linked list
+  struct Node* head = NULL;
 
-  int i,j,k;
-  int sum=0;
-
-  for(i=0;i<nx;i++)
-  {
-    z[i]=x[i];
+  // construct a linked list
+  for (i = n-1; i >= 0; i--) {
+      push(&head, keys[i]);
   }
 
-  for(j=i,i=0; i<ny ;i++,j++)
-  {
-    z[j]=y[i];
+  //insertSort(&head);
 
-  }
-
-  for(i=0;i<nz;i++)
-   for(j=0;j<nz-i-1;j++)
-    if(z[j]>z[j+1])swap(z[j],z[j+1]);    //bubble sort 
-
-//for(i=0;i<nz;i++) printf("%d ",z[i]);
-
-  for(i=0;i<nz;i++){      //seperate to each arrays
-    if(i<nx)
-     x[i]=z[i];
-     else
-     y[i-nx]=z[i];
-   }
-
-    for(i=0;i<nx;i++) printf("%d ",x[i]);  printf("\n");
-    for(i=0;i<ny;i++) printf("%d ",y[i]);
+  // print linked list
+  printList(head);
 
   return 0;
+
 }
