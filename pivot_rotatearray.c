@@ -1,5 +1,6 @@
 #include<stdio.h>
 
+#if 0
 void swap( int *a,int *b)
 {
   *a^=*b;
@@ -7,7 +8,14 @@ void swap( int *a,int *b)
   *a^=*b;
 
 }
-
+#endif
+void swap(int *a,int *b)
+{
+  int temp;
+  temp=*a;
+  *a=*b;
+  *b=temp;
+}
 //1.  reverse from 0 to pivot, pivot to n-1
 //2.  reverse 0 to n-1
 //

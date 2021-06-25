@@ -97,71 +97,27 @@ void mergesort(struct node **headref)
   *headref=sortedMerge(a,b);
 
 }
-
-int length(struct node *head)
-{
-  int count=0;
-  struct node *current=head;
-
-  while(current!=NULL)
-  {
-    count++;
-    current=current->next;
-  }
-return count;
-}
-
-void sortint(struct node *head,int n,struct node **a,struct node **b)
-{
-  struct node *current=head;
-  int count=0;
-  *a=head;
-
-  while(current!=NULL && count++< n)
-  {
-    current=current->next;
-  }
-  *b=current->next;
-  current->next=NULL;
-  //current->next=*b;
-  //current->next=NULL;
-//  *b=current;
-
-}
-
 int main()
 {
   int i;
 
-  //int arr[] = {6, 8, 4, 3, 1, 9 };
-  int a[]={2,6,9,10,15};
-  int b[]={1,4,5,20};
+  int arr[] = {6, 8, 4, 3, 1, 9 };
 
-  int na = sizeof(a)/sizeof(a[0]);
-  int nb = sizeof(b)/sizeof(b[0]);
+  int n = sizeof(arr)/sizeof(arr[0]);
 
   struct node* head = NULL;
-  struct node *arr=NULL;
-  struct node *brr=NULL;
-
+  struct node *F=NULL;
+  struct node *B=NULL;
   // construct a linked list
-  for (i = na-1; i >=0; i--) {
-      push(&arr, a[i]);
-  }
-  // construct a linked list
-  for (i = nb-1; i >=0; i--) {
-      push(&brr, b[i]);
+  for (i = n-1; i >=0; i--) {
+      push(&head, arr[i]);
   }
 
- int La=length(arr);
- int Lb=length(brr);
-
-// printf("**%d %d\n",La,Lb);
-  head=sortedMerge(arr,brr);
-  arr=brr=NULL;
-  sortint(head,La-1,&arr,&brr);
-  printList(arr); printf("\n");
-  printList(brr);
+//  printList(head);   printf("\n");
+//  FrontBackSplit2(head,&F,&B);
+  mergesort(&head);
+  //printList(F);   printf("\n"); printList(B);
+  printList(head);
   return 0;
 
 }

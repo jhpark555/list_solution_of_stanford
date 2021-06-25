@@ -1,12 +1,8 @@
-//In-place merge two sorted arrays
-
+//https://www.techiedelight.com/in-place-merge-two-sorted-linked-lists/
 
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-
-#define swap(a,b) ( a^=b^=a^=b)
-int count;
 
 struct node
 {
@@ -53,50 +49,6 @@ struct node *sortedMerge(struct node *a,struct node *b)
  return result;
 
 }
-void FrontBackSplit2(struct node *source,struct node **frontRef,struct node **backRef)
-{
-   struct node *slow=NULL;
-   struct node *fast=NULL;
-
-   if(source==NULL || source->next==NULL){
-    *frontRef=source;
-    *backRef=NULL;
-  }
-  else {
-    slow=source;
-    fast=source->next;
-    while(fast!=NULL)
-    {
-      fast=fast->next;
-      if(fast!=NULL)
-      {
-        slow=slow->next;
-        fast=fast->next;
-      }
-    }
-
-    *frontRef=source;
-    *backRef=slow->next;
-    slow->next=NULL;
-
-  }
-}
-
-void mergesort(struct node **headref)
-{
-  if(*headref==NULL || (*headref)->next==NULL)
-   return;
-
-  struct node *a;
-  struct node *b;
-
-  FrontBackSplit2(*headref,&a,&b);
-  mergesort(&a);
-  mergesort(&b);
-
-  *headref=sortedMerge(a,b);
-
-}
 
 int length(struct node *head)
 {
@@ -123,10 +75,6 @@ void sortint(struct node *head,int n,struct node **a,struct node **b)
   }
   *b=current->next;
   current->next=NULL;
-  //current->next=*b;
-  //current->next=NULL;
-//  *b=current;
-
 }
 
 int main()
