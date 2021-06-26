@@ -70,6 +70,18 @@ int compute2(int n, int d)
     return n + d;
 }
 
+// Function to swap bits at position `p` and `q` in integer `n`
+int swap1(int n, int p, int q)
+{
+    // if bits are different at position `p` and `q`
+    if (((n & (1 << p)) >> p) ^ ((n & (1 << q)) >> q))
+    {
+        n ^= (1 << p);
+        n ^= (1 << q);
+    }
+    return n;
+}
+
 int main()
 {
   int n=5;
@@ -128,4 +140,7 @@ n=38;
 d=7;
 printf("%d %%  %d = %d\n",n,d,compute2(n,d));
 
+n=10;
+int p=2,q=1;
+printf("%d %d \n",swap1(n,p,q),swap1(31,2,6));
 }

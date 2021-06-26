@@ -122,7 +122,7 @@ void sortint(struct node *head,int n,struct node **a,struct node **b)
     current=current->next;
   }
   *b=current->next;
-  current->next=NULL;
+  //current->next=NULL;
   //current->next=*b;
   //current->next=NULL;
 //  *b=current;
