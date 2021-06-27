@@ -1,12 +1,7 @@
-//In-place merge two sorted arrays
-
 
 #include <stdio.h>
-#include <string.h>
 #include <stdlib.h>
 
-#define swap(a,b) ( a^=b^=a^=b)
-int count;
 
 struct node
 {
@@ -34,134 +29,50 @@ void push(struct node **head,int data)
   *head=newNode;
 }
 
-struct node *sortedMerge(struct node *a,struct node *b)
+struct node *detectionNodes(struct node *a)
 {
-  if(a==NULL) return b;
-  else if(b==NULL) return a;
+  struct node *slow=a;
+  struct node *fast=a;
 
-  struct node* result=NULL;
-
-  if(a->data < b->data )
+  while(slow && fast)
   {
-    result =a;
-    result->next=sortedMerge(a->next,b);
+    slow=slow->next;
+    fast=fast->next->next;
+    if(slow==fast) break;
   }
-  else {
-    result =b;
-    result->next =sortedMerge(a,b->next);
-  }
- return result;
-
+  //printf("%d  %d",slow->data,fast->data);
+  return fast;
 }
-void FrontBackSplit2(struct node *source,struct node **frontRef,struct node **backRef)
+
+struct node *findCrossNodes(struct node *head,struct node *loop)
 {
-   struct node *slow=NULL;
-   struct node *fast=NULL;
-
-   if(source==NULL || source->next==NULL){
-    *frontRef=source;
-    *backRef=NULL;
-  }
-  else {
-    slow=source;
-    fast=source->next;
-    while(fast!=NULL)
-    {
-      fast=fast->next;
-      if(fast!=NULL)
-      {
-        slow=slow->next;
-        fast=fast->next;
-      }
-    }
-
-    *frontRef=source;
-    *backRef=slow->next;
-    slow->next=NULL;
-
-  }
+   while(head && loop )
+   {
+     head=head->next;
+     loop=loop->next;
+     if(head==loop) return loop;
+   }
 }
-
-void mergesort(struct node **headref)
-{
-  if(*headref==NULL || (*headref)->next==NULL)
-   return;
-
-  struct node *a;
-  struct node *b;
-
-  FrontBackSplit2(*headref,&a,&b);
-  mergesort(&a);
-  mergesort(&b);
-
-  *headref=sortedMerge(a,b);
-
-}
-
-int length(struct node *head)
-{
-  int count=0;
-  struct node *current=head;
-
-  while(current!=NULL)
-  {
-    count++;
-    current=current->next;
-  }
-return count;
-}
-
-void sortint(struct node *head,int n,struct node **a,struct node **b)
-{
-  struct node *current=head;
-  int count=0;
-  *a=head;
-
-  while(current!=NULL && count++< n)
-  {
-    current=current->next;
-  }
-  *b=current->next;
-  //current->next=NULL;
-  //current->next=*b;
-  //current->next=NULL;
-//  *b=current;
-
-}
-
 int main()
 {
+  // input keys
+  int keys[] = { 1, 2, 3, 4, 5,6,7 };
+  int n = sizeof(keys) / sizeof(keys[0]);
   int i;
-
-  //int arr[] = {6, 8, 4, 3, 1, 9 };
-  int a[]={2,6,9,10,15};
-  int b[]={1,4,5,20};
-
-  int na = sizeof(a)/sizeof(a[0]);
-  int nb = sizeof(b)/sizeof(b[0]);
-
-  struct node* head = NULL;
-  struct node *arr=NULL;
-  struct node *brr=NULL;
-
-  // construct a linked list
-  for (i = na-1; i >=0; i--) {
-      push(&arr, a[i]);
+  struct node * head = NULL;
+  for (i = n - 1; i >= 0; i--) {
+      push(&head, keys[i]);
   }
-  // construct a linked list
-  for (i = nb-1; i >=0; i--) {
-      push(&brr, b[i]);
-  }
+  // insert cycle
+ head->next->next->next->next->next->next->next = head->next->next->next;
 
- int La=length(arr);
- int Lb=length(brr);
+ struct node *CP=detectionNodes(head);
+ printf("Cross point=%d \n",CP->data);       //meet nodes in loop
+//printList(head); printf("  ");
 
-// printf("**%d %d\n",La,Lb);
-  head=sortedMerge(arr,brr);
-  arr=brr=NULL;
-  sortint(head,La-1,&arr,&brr);
-  printList(arr); printf("\n");
-  printList(brr);
-  return 0;
+ struct node *curr=findCrossNodes(head,CP);   //cross nodes in loop
+
+ printf("Start node= %d \n",curr->data);
+return 0;
 
 }
