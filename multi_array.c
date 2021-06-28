@@ -36,7 +36,8 @@ void inputMatrix(int (*mat)[COLS])
     {
         for (j = 0; j < COLS; j++)
         {
-            scanf("%d", (*(mat + i) + j));
+            //scanf("%d", (*(mat + i) + j));
+          mat[i][j]= i+j;
         }
     }
 }
