@@ -48,7 +48,7 @@ struct node * detectCycle(struct node *head)
     if(slow==fast) {
     //  printf("%d ",slow->data);
     //  prev->next=NULL;
-     fast->next=NULL;
+     fast->next=NULL;     // disconnect if we want to see list in main
       return head;        // fast will be overlap after rotation
     }
   }

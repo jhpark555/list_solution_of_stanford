@@ -12,7 +12,7 @@
 #define EXAMPLE_BUFFER_SIZE 5
 
 // The definition of our circular buffer structure is hidden from the user
-typedef struct circular_buf_t{
+typedef struct circular_buf_s{
 	uint8_t * buffer;
 	size_t head;
 	size_t tail;

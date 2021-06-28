@@ -149,24 +149,26 @@ void display()
 
 int main()
 {
-  insert(10);
-  insert(20);
-  insert(30);
-    insert(40);
- delete();
- delete();
- delete();
+  //array queue
+  //insert(10);
+//  insert(20);
+//  insert(30);
+  //  insert(40);
+ //delete();
+// delete();
+ //delete();
 
-  display();
+//  display();
 
- //  q= (struct Q*)malloc(sizeof(struct Q));
+// linked list queue
+   q= (struct Q*)malloc(sizeof(struct Q));
 
-//  create_queue(q);
-//  q= insertq(q,10);
-//  q= insertq(q,20);
- //   deleteq(q);
+  create_queue(q);
+  q= insertq(q,10);
+  q= insertq(q,20);
+  //  deleteq(q);
 
- // displayq(q);
+  displayq(q);
 
- // free(q);
+  free(q);
 }

@@ -1,3 +1,6 @@
+// compare arr[] is same order with preorder  arr이 tree의 preorder 순서와 같은지
+//확인하는 코 드
+
 #include<stdio.h>
 #include<stdlib.h>
 
@@ -33,7 +36,7 @@ void printpreorder(struct node *root,int pre[])
   static int i=0;
   if(root!=NULL)
   {
-    //printf("%d ->",root->data);
+    printf("%d ->",root->data);
     pre[i++]=root->data;
     printpreorder(root->left,pre);
     printpreorder(root->right,pre);
@@ -57,11 +60,11 @@ int main()
   }
 
  printpreorder(root,pre);
-
+ printf("\n");
 for(i=0;i<n;i++)
 {
   if(arr[i]!=pre[i])  break;
-//  printf("%d %d :",pre[i],arr[i]);
+  printf("%d %d :\n",pre[i],arr[i]);
 }
 
 if(i!=n) printf("\nNot preorder\n");

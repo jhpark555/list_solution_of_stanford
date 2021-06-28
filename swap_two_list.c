@@ -100,7 +100,7 @@ struct node* swap(struct node*head)
        break;
      }
                      // after : next->current->temp->Next->current
-    current->next=temp->next;
+    current->next=temp->next;    // next current should be swapped nodes so it skip one node advance.
      current=temp;
    }
 
