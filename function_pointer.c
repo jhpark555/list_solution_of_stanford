@@ -37,7 +37,12 @@ int test(const void *a,const void *b)
      functionPointer = &test;
 
      // Use Point typedef
-     Point point = { 10, 20 };
+     Point point[] = {
+                    {10,20},
+                    {20,30},
+                    {30,40},
+                    {40,50},
+                     };
 
      // Use integer typedef
      Integer num = 100;
@@ -47,11 +52,11 @@ int test(const void *a,const void *b)
 
 
      // Print all values
-     printf("Point x=%d, y=%d\n", point.x, point.y);
+     printf("Point x=%d, y=%d\n", point[1].x, point[1].y);
      printf("num = %d\n", num);
      printf("name = %s\n", name);
 
-     int k= functionPointer(&point.x,&point.y);
+     int k= functionPointer(&point[1].x,&point[1].y);
      printf("Functioon pointer =%d \n",k);
 
      return 0;

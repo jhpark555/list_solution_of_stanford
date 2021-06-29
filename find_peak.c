@@ -14,7 +14,7 @@ int findpeak(int arr[],int n)
 
   for(i=1;i<n-1;i++)
   {
-    if(arr[i]>=arr[i-1] && arr[i]>=arr[i+1])  return i;   // peak value
+    if(arr[i]>=arr[i-1] && arr[i]>=arr[i+1])  return arr[i];   // peak value
   }
 }
 int main()

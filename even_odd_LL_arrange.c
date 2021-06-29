@@ -48,6 +48,7 @@ void movenode(struct node** destRef, struct node** sourceRef)
 
 }
 #endif
+#if 1    //move like push
 void movenode(struct node **destRef,struct node **sourceRef)
 {
     struct node *current=*sourceRef;
@@ -56,6 +57,28 @@ void movenode(struct node **destRef,struct node **sourceRef)
     current->next=*destRef;
     *destRef=current;
 }
+#else   // move at the end of dst
+void movenode(struct node **destRef,struct node **sourceRef)
+{
+  struct node *temp=*sourceRef;
+  struct node *current=*destRef;
+
+  *sourceRef=(*sourceRef)->next;
+  if(*destRef==NULL) {
+    temp->next=*destRef;
+    *destRef=temp;
+  }
+  else{
+  while(current->next!=NULL)
+  {
+    current=current->next;
+  }
+
+  current->next=temp;
+  temp->next=NULL;
+ }
+}
+#endif
 void reverseNode(struct node** headref)
 {
   struct node *Next=NULL;

@@ -13,17 +13,18 @@ int main()
   for(i=0;i<n;i++) for(j=i;j<n;j++)
   {
     sum=0;
+    printf("(");
     for(k=i;k<=j;k++){
-    //  printf("%d->",arr[k]);
+      printf("%d->",arr[k]);
       sum +=arr[k];
-
     }
+    printf(")\n");
     if(sum==MAX){
-        printf("\nsubarray sum %d : ",MAX);
-        max=j-i+1;
+        //printf("\nsubarray sum %d : ",MAX);
+        max=j-i+1;       // how many element is there
       //  printf("max=%d \n",max);
         if(max>maxmax) maxmax=max;
-        for(k=i;k<=j;k++) printf("%d ",arr[k]);
+      //  for(k=i;k<=j;k++) printf("%d ",arr[k]);
     }
 
   }
