@@ -34,12 +34,12 @@ int compare(struct node *head,struct node *rhead)
 {
    struct node *current=head;
 
-   while(head!=NULL)
+   while(current!=NULL)
    {
      if(head->data != rhead->data) { return -1; }
      head=head->next;
      rhead=rhead->next;
-  //   current=current->next;
+     current=current->next;
    }
   return 0;
 }

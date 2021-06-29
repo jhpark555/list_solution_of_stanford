@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 
+// 짝수번째 arr값을 홀수로 넣르면서 엇앰
 void array_con(int arr[],int n)
 {
     int i,k;
@@ -13,8 +14,8 @@ void array_con(int arr[],int n)
 
   for(i=0;i<n-1;i++)        //  shift every even array
   {
-    for(k=i+1;k<=n/2;k++)  arr[k]=arr[k+1];   // delete even array
-    printf("%d ",arr[i]);
+    for(k=i+1;k<n/2;k++)  arr[k]=arr[k+1];   // delete even array
+    //printf("%d ",arr[i]);
   }
 
 }

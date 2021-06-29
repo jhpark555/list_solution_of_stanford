@@ -11,7 +11,7 @@ void findPair(int arr[],int n,int sum)
     {
       if(*prev+*curr == sum){
         printf("%d %d\n",*prev,*curr);
-      //   return;
+         return;
        }
     }
 
