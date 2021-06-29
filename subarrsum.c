@@ -17,6 +17,7 @@ int arr[]={ 5, 6, -5, 5, 3, 5, 3, -2, 0 };
     sum=0;
     for(k=i;k<=j;k++){
     //  printf("%d->",arr[k]);
+    printf("(%d %d )\n",i,j);
       sum +=arr[k];
 
     }
