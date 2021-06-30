@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+
+// 두개의 element중에서 arr[j]>arr[i]인 조건중에서 j-i가 최대인경우 를 print하라.
 int maxIJ(int arr[], int n)
 {
   int i,j;
