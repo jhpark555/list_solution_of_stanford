@@ -1,3 +1,5 @@
+//https://www.techiedelight.com/find-symmetric-pairs-array-pairs/
+
 #include <stdio.h>
 #include <stdlib.h>
 

@@ -1,9 +1,9 @@
 #include <stdio.h>
 
-void initialize(int **A, int r)
+void initialize(int ***A, int r)
 {
   int i,j;
-   *A = (int *)malloc(sizeof(int *)*r);
+   *A = (int **)malloc(sizeof(int *)*r);
    for(i = 0; i< r; i++) {
             (*A)[i] = 10*i;
    }
@@ -11,7 +11,7 @@ void initialize(int **A, int r)
 }
 int main()
 {
-    int *A;
+    int **A;
     int i, r=10;
 
     initialize(&A, r);
