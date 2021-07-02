@@ -63,8 +63,6 @@ int findSmallestMissing(int arr[],int n)
 }
 
 
-
-
 int main()
 {
   int arr[]={1,4,2,-1,6,5};
