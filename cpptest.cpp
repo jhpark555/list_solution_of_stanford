@@ -1,27 +1,55 @@
 // C++ program to sizes of data types
-#include<iostream>
+// C++ program to demonstrate Local variables
+// C++ program to demonstrate Static variables
+
+#include <iostream>
 using namespace std;
 
+class Marks {
+
+public:
+    // This is a class variable
+    static int studentNumber;
+
+    // These variables are instance variables.
+    // These variables are in a class
+    // and are not inside any function
+    int engMarks;
+    int mathsMarks;
+    int phyMarks;
+
+    Marks()
+    {
+
+        // Modify the class variable
+        ++studentNumber;
+    };
+};
+
+// Setting the class variable of Marks
+int Marks::studentNumber = 0;
+
+// Driver code
 int main()
 {
-    cout << "Size of char : " << sizeof(char)
-      << " byte" << endl;
-    cout << "Size of int : " << sizeof(int)
-      << " bytes" << endl;
-    cout << "Size of short int : " << sizeof(short int)
-      << " bytes" << endl;
-    cout << "Size of long int : " << sizeof(long int)
-       << " bytes" << endl;
-    cout << "Size of signed long int : " << sizeof(signed long int)
-       << " bytes" << endl;
-    cout << "Size of unsigned long int : " << sizeof(unsigned long int)
-       << " bytes" << endl;
-    cout << "Size of float : " << sizeof(float)
-       << " bytes" <<endl;
-    cout << "Size of double : " << sizeof(double)
-       << " bytes" << endl;
-    cout << "Size of wchar_t : " << sizeof(wchar_t)
-       << " bytes" <<endl;
 
-    return 0;
+    // object of Marks
+    Marks obj1;
+    obj1.engMarks = 50;
+    obj1.mathsMarks = 80;
+    obj1.phyMarks = 90;
+
+    // displaying marks for first object
+    cout << "Marks for object:\n";
+
+    // Now to display the static variable,
+    // it can be directly done
+    // using the class name
+    cout << Marks::studentNumber << endl;
+
+    // But same is not the case
+    // with instance variables
+    cout << obj1.engMarks << endl;
+    cout << obj1.mathsMarks << endl;
+    cout << obj1.phyMarks << endl;
 }
