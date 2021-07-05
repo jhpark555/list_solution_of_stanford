@@ -27,8 +27,6 @@ void insert(int a[],int n)
     else has[abs(a[i])][1] =1;
 
   }
-  for(i=0;i<n;i++)
-   printf("%d  %d \n",has[i][0],has[i][1]);
 }
 
 int main()
