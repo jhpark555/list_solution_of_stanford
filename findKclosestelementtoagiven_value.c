@@ -22,7 +22,7 @@ int *findClosestArr( int arr[],int n, int k, int x)
 
      sum=0;
      for( j=i ; j<i+k && j< n ; j++ ) {
-      //printf("%d %d \n",i,j);
+      printf("%d %d \n",i,j);
        sum +=abb[j];
      }
      if(sum < min){ min=sum; start=i;}
