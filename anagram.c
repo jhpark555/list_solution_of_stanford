@@ -20,6 +20,7 @@ int findAnagram(char *s1,char *s2,int m,int n)
   int count=0;
 
   sortStr(s1,m);   sortStr(s2,n);
+
   for(i=0;i<m;i++)
   {
     if(*s1++==*s2++) count++;
