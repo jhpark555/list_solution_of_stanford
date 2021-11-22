@@ -136,6 +136,7 @@ void pop(struct node **head, int *data )
     free(temp);
 }
 
+
 struct node *copylist(struct node *head)
 {
    struct node *newlist=NULL;
