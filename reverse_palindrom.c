@@ -1,9 +1,6 @@
-/******************************************************************************
 
-
-*******************************************************************************/
 #include <stdio.h>
-
+#include <stdlib.h>
 
 struct node{
     int data;
@@ -22,7 +19,7 @@ struct node *buildonetwothree()
     second->data=2;
     second->next=third;
 
-    third->data=1;
+    third->data=2;
     third->next = NULL;
 
     return head;
@@ -63,12 +60,12 @@ int compare( struct node *l1,struct node *l2)
 {
     struct node *current=l1;
 
-    while(current!=NULL)
+    while(l1!=NULL/*current!=NULL*/)
     {
         if(l1->data!=l2->data) return -1;
         l1=l1->next;
         l2=l2->next;
-        current=current->next;
+      //  current=current->next;
     }
     return 0;
 }
